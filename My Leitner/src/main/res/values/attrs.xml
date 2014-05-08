@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="multiLine" format="boolean" />
+    <attr name="fixedHeight" format="boolean" />
+
+    <declare-styleable name="AppTextView">
+        <attr name="multiLine" />
+    </declare-styleable>
+
+    <declare-styleable name="AppEditText">
+        <attr name="multiLine" />
+    </declare-styleable>
+
+    <declare-styleable name="AppListView">
+        <attr name="fixedHeight" />
+    </declare-styleable>
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/My Leitner/My Leitner.iml" filepath="$PROJECT_DIR$/My Leitner/My Leitner.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MyLeitnerAndroid.iml" filepath="$PROJECT_DIR$/MyLeitnerAndroid.iml" />
+    </modules>
+  </component>
+</project>
+

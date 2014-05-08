@@ -1,0 +1,127 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+    </style>
+
+
+    <!-- START style TextView -->
+    <style name="TextView">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textColor">@color/overal_text_color_dark</item>
+        <item name="multiLine">false</item>
+        <item name="android:textSize">@dimen/font_medium</item>
+    </style>
+
+    <style name="TextView.small.smaller" parent="TextView">
+        <item name="android:textSize">@dimen/font_small_v</item>
+    </style>
+
+    <style name="TextView.small" parent="TextView">
+        <item name="android:textSize">@dimen/font_small</item>
+    </style>
+
+    <style name="TextView.small.larger" parent="TextView">
+        <item name="android:textSize">@dimen/font_small_x</item>
+    </style>
+
+    <style name="TextView.medium" parent="TextView">
+        <item name="android:textSize">@dimen/font_medium</item>
+    </style>
+
+    <style name="TextView.medium.larger" parent="TextView">
+        <item name="android:textSize">@dimen/font_medium_x</item>
+    </style>
+
+    <style name="TextView.large" parent="TextView">
+        <item name="android:textSize">@dimen/font_large</item>
+    </style>
+
+    <style name="TextView.small.multiline" parent="TextView">
+        <item name="android:textSize">@dimen/font_small</item>
+        <item name="multiLine">true</item>
+    </style>
+
+    <style name="TextView.small.larger.multiline" parent="TextView">
+        <item name="android:textSize">@dimen/font_small_x</item>
+        <item name="multiLine">true</item>
+    </style>
+
+    <style name="TextView.medium.multiline" parent="TextView">
+        <item name="android:textSize">@dimen/font_medium</item>
+        <item name="multiLine">true</item>
+    </style>
+
+    <style name="TextView.large.multiline" parent="TextView">
+        <item name="android:textSize">@dimen/font_large</item>
+        <item name="multiLine">true</item>
+    </style>
+
+    <style name="textViewBoxTitle" parent="TextView.large">
+        <item name="android:layout_margin">@dimen/small_vvv</item>
+        <item name="android:padding">@dimen/small</item>
+    </style>
+    <!-- END style TextView -->
+
+
+
+
+    <!-- START styles EditText -->
+    <style name="appEditText">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:background">@null</item>
+        <item name="android:textColor">@color/overal_text_color_dark</item>
+        <item name="multiLine">false</item>
+        <item name="android:textSize">@dimen/font_medium</item>
+    </style>
+
+    <style name="appEditText.small" parent="appEditText">
+        <item name="android:textSize">@dimen/font_small</item>
+    </style>
+
+    <style name="appEditText.medium" parent="appEditText">
+        <item name="android:textSize">@dimen/font_medium</item>
+    </style>
+
+    <style name="appEditText.medium.large" parent="appEditText">
+        <item name="android:textSize">@dimen/font_medium_x</item>
+    </style>
+
+    <style name="appEditText.large" parent="appEditText">
+        <item name="android:textSize">@dimen/font_large</item>
+    </style>
+
+    <style name="appEditText.small.multiline" parent="appEditText">
+        <item name="android:textSize">@dimen/font_small</item>
+        <item name="multiLine">true</item>
+    </style>
+
+    <style name="appEditText.medium.multiline" parent="appEditText">
+        <item name="android:textSize">@dimen/font_medium</item>
+        <item name="multiLine">true</item>
+    </style>
+
+    <style name="appEditText.medium.large.multiline" parent="appEditText">
+        <item name="android:textSize">@dimen/font_medium_x</item>
+        <item name="multiLine">true</item>
+    </style>
+
+    <style name="appEditText.large.multiline" parent="appEditText">
+        <item name="android:textSize">@dimen/font_large</item>
+        <item name="multiLine">true</item>
+    </style>
+
+    <style name="editTextSetting" parent="appEditText.large">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_margin">@dimen/small_v</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:padding">@dimen/small_v</item>
+    </style>
+    <!-- END styles EditText -->
+
+
+</resources>

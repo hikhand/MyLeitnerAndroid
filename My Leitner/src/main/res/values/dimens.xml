@@ -1,0 +1,26 @@
+<resources>
+    <dimen name="navigation_drawer_width">240dp</dimen>
+
+    <!-- START overall dimen -->
+    <dimen name="small_vvv">1dp</dimen>
+    <dimen name="small_vv">2dp</dimen>
+    <dimen name="small_v">3dp</dimen>
+    <dimen name="small">5dp</dimen>
+    <dimen name="medium">8dp</dimen>
+    <dimen name="medium_x">12dp</dimen>
+    <dimen name="large">15dp</dimen>
+    <dimen name="large_tablet">15dp</dimen>
+    <!-- END overall dimen -->
+
+    <!-- START overall font sizes -->
+    <dimen name="font_small_v">8dp</dimen>
+    <dimen name="font_small">10dp</dimen>
+    <dimen name="font_small_x">12dp</dimen>
+    <dimen name="font_medium">14.5dp</dimen>
+    <dimen name="font_medium_x">15.5dp</dimen>
+    <dimen name="font_large">17dp</dimen>
+    <dimen name="font_large_x">20dp</dimen>
+    <dimen name="font_large_xx">50dp</dimen>
+    <!-- END overall font sizes -->
+
+</resources>
