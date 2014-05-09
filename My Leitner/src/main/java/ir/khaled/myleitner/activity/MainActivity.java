@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 
+import ir.khaled.myleitner.Helper.SocketHelper;
 import ir.khaled.myleitner.fragment.NavigationDrawerFragment;
 import ir.khaled.myleitner.R;
 
@@ -40,9 +41,14 @@ public class MainActivity extends ActionBarActivity
         mTitle = getTitle();
 
         // Set up the drawer.
-        mNavigationDrawerFragment.setUp(
-                R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout));
+        mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SocketHelper.getInstance();
+            }
+        }).start();
     }
 
     @Override

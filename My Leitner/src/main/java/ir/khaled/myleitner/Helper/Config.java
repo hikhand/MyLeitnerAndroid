@@ -24,20 +24,12 @@ import ir.khaled.myleitner.view.AppEditText;
  * Created by kh.bakhtiari on 5/6/2014.
  */
 public class Config {
-    public static final int PASSWORD_MIN_LENGTH = 6;
-    public static final int USERNAME_MIN_LENGTH = 3;
-    public static final int ACCOUNT_CHARGE_MIN_AMOUUNT = 500;
+    public static final String SERVER_ADDRESS = "192.168.1.41";
+    public static final int SERVER_PORT = 44485;
     public static final String urlWebService = "http://ws.iranapps.ir/v2/";
-    //    public static final String urlWebService = "http://testws.iranapps.ir/v2/";
-//    public static final String urlWebServiceHttps = "https://.ws.iranapps.com/v1/";
-    public static String updateUrl = "http://developer.iranapps.ir/app/update.xml";
-    public static final String SharedPreferences_name = "iranapp_SharedPreferences";
     public static final String SHARED_PREFS_NAME = "iranapps";
     public static final String FONT_UI = "font_ui.ttf";
     public static final String FONT_MULTI_LINE = "font_multi_line.ttf";
-    public static final int TIME_OUT_CONNECT = 10 * 1000;
-    public static final int TIME_OUT_READ = 90 * 1000;
-    public static final int TIME_OUT_READ_DOWNLOAD = 150 * 1000;
     private static Typeface fontUi;
     private static Typeface fontMultiLine;
     private static boolean isDownloadingFonts = false;
@@ -224,4 +216,5 @@ public class Config {
         if (debugMode)
             Log.d(tag, message);
     }
+
 }
