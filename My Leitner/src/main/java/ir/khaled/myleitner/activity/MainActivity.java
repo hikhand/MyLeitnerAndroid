@@ -1,21 +1,21 @@
 package ir.khaled.myleitner.activity;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
 
-import ir.khaled.myleitner.Helper.SocketHelper;
-import ir.khaled.myleitner.fragment.NavigationDrawerFragment;
 import ir.khaled.myleitner.R;
+import ir.khaled.myleitner.fragment.NavigationDrawerFragment;
+import ir.khaled.myleitner.helper.SocketHelper;
 
 
 public class MainActivity extends ActionBarActivity
@@ -46,6 +46,7 @@ public class MainActivity extends ActionBarActivity
         new Thread(new Runnable() {
             @Override
             public void run() {
+                /** start socket connection to server */
                 SocketHelper.getInstance();
             }
         }).start();
@@ -134,8 +135,9 @@ public class MainActivity extends ActionBarActivity
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
+                                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
             return rootView;
         }
 

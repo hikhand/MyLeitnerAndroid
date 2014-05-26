@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="overal_text_color_dark">#323232</color>
+    <color name="lineColor">#CCC</color>
 </resources>

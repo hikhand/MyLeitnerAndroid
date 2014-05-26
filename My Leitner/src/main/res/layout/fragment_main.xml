@@ -1,12 +1,37 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="ir.khaled.myleitner.activity.MainActivity$PlaceholderFragment">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:id="@+id/section_label"
+    <LinearLayout
+        android:id="@+id/ll_loading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/medium"
+        android:background="#ffe6e564">
+
+        <TextView
+            android:id="@+id/tv_errorText"
+            style="@style/EditText.medium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/error"
+            android:layout_marginRight="@dimen/small"
+            android:layout_gravity="center_vertical"/>
+
+        <Button
+            android:id="@+id/bt_retry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/retry"
+            android:layout_gravity="center_vertical"/>
+
+    </LinearLayout>
+
+    <ir.khaled.myleitner.view.AppTextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-</RelativeLayout>
+        android:layout_height="@dimen/medium"/>
+</LinearLayout>

@@ -7,8 +7,8 @@ import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.widget.EditText;
 
-import ir.khaled.myleitner.Helper.Config;
 import ir.khaled.myleitner.R;
+import ir.khaled.myleitner.helper.Util;
 
 /**
  * Created by kh.bakhtiari on 1/21/14.
@@ -48,13 +48,13 @@ public class AppEditText extends EditText {
 
     private void setTypeFaceUI() {
         if (this.isInEditMode()) return;
-        Typeface typeface = Config.getAppFontUI(getContext());
+        Typeface typeface = Util.getAppFontUI(getContext());
         this.setTypeface(typeface);
     }
 
     private void setTypeFaceMultiple() {
         if (this.isInEditMode()) return;
-        Typeface typeface = Config.getAppFontMultiple(getContext());
+        Typeface typeface = Util.getAppFontMultiple(getContext());
         this.setTypeface(typeface);
     }
 

@@ -1,5 +1,6 @@
 <resources>
     <dimen name="navigation_drawer_width">240dp</dimen>
+    <dimen name="lineHeight">1dp</dimen>
 
     <!-- START overall dimen -->
     <dimen name="small_vvv">1dp</dimen>
@@ -23,4 +24,10 @@
     <dimen name="font_large_xx">50dp</dimen>
     <!-- END overall font sizes -->
 
+
+
+
+    <!-- START DIALOG -->
+    <dimen name="dialog_buttonHeight">44dp</dimen>
+    <!-- END DIALOG -->
 </resources>

@@ -2,9 +2,13 @@
 <resources>
 
     <string name="app_name">My Leitner</string>
+    <string name="retry">Retry</string>
+    <string name="error">Operation has encountered a problem</string>
+    <string name="errorConnection">can\'t connect to server. check your connection.</string>
 
     <!-- START HOME-->
     <string name="homeTitle">Home</string>
+    <string name="errorLoadData">Can\'t load data. check your connection</string>
 
 
     <!-- END HOME-->

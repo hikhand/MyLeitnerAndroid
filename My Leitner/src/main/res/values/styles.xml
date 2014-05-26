@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
     </style>
 
@@ -69,7 +69,7 @@
 
 
     <!-- START styles EditText -->
-    <style name="appEditText">
+    <style name="EditText">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:background">@null</item>
@@ -78,43 +78,43 @@
         <item name="android:textSize">@dimen/font_medium</item>
     </style>
 
-    <style name="appEditText.small" parent="appEditText">
+    <style name="EditText.small" parent="EditText">
         <item name="android:textSize">@dimen/font_small</item>
     </style>
 
-    <style name="appEditText.medium" parent="appEditText">
+    <style name="EditText.medium" parent="EditText">
         <item name="android:textSize">@dimen/font_medium</item>
     </style>
 
-    <style name="appEditText.medium.large" parent="appEditText">
+    <style name="EditText.medium.large" parent="EditText">
         <item name="android:textSize">@dimen/font_medium_x</item>
     </style>
 
-    <style name="appEditText.large" parent="appEditText">
+    <style name="EditText.large" parent="EditText">
         <item name="android:textSize">@dimen/font_large</item>
     </style>
 
-    <style name="appEditText.small.multiline" parent="appEditText">
+    <style name="EditText.small.multiline" parent="EditText">
         <item name="android:textSize">@dimen/font_small</item>
         <item name="multiLine">true</item>
     </style>
 
-    <style name="appEditText.medium.multiline" parent="appEditText">
+    <style name="EditText.medium.multiline" parent="EditText">
         <item name="android:textSize">@dimen/font_medium</item>
         <item name="multiLine">true</item>
     </style>
 
-    <style name="appEditText.medium.large.multiline" parent="appEditText">
+    <style name="EditText.medium.large.multiline" parent="EditText">
         <item name="android:textSize">@dimen/font_medium_x</item>
         <item name="multiLine">true</item>
     </style>
 
-    <style name="appEditText.large.multiline" parent="appEditText">
+    <style name="EditText.large.multiline" parent="EditText">
         <item name="android:textSize">@dimen/font_large</item>
         <item name="multiLine">true</item>
     </style>
 
-    <style name="editTextSetting" parent="appEditText.large">
+    <style name="editTextSetting" parent="EditText.large">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_margin">@dimen/small_v</item>
@@ -123,5 +123,26 @@
     </style>
     <!-- END styles EditText -->
 
+
+
+
+    <!-- START DIALOG -->
+    <style name="dialog_style" parent="@android:style/Theme.Translucent.NoTitleBar" >
+        <item name="android:windowAnimationStyle">@style/PauseDialogAnimation</item>
+    </style>
+    <style name="PauseDialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/alpha_to_visible</item>
+        <item name="android:windowExitAnimation">@anim/alpha_to_invisible</item>
+    </style>
+
+
+    <style name="dialog_transparent" parent="@android:style/Theme.Translucent.NoTitleBar">
+        <item name="android:windowAnimationStyle">@style/style_dialog_transparent</item>
+    </style>
+    <style name="style_dialog_transparent">
+        <item name="android:windowEnterAnimation">@anim/to_visible</item>
+        <item name="android:windowExitAnimation">@anim/to_invisible</item>
+    </style>
+    <!-- END DIALOG -->
 
 </resources>
