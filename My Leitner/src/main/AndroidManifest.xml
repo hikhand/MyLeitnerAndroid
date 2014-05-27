@@ -13,6 +13,7 @@
 
         <activity
             android:name=".activity.MainActivity"
+            android:configChanges="layoutDirection|orientation|screenSize|keyboardHidden|locale"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

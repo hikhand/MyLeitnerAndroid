@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">My Leitner</string>
-    <string name="retry">Retry</string>
-    <string name="error">Operation has encountered a problem</string>
-    <string name="errorConnection">can\'t connect to server. check your connection.</string>
-    <string name="ok">Ok</string>
+    <string name="app_name">لایتنر من</string>
+    <string name="retry">تلاش مجدد</string>
+    <string name="error">عملیات با خطا مواجه شد</string>
+    <string name="errorConnection">خطا در برقرای ارتباط با سرور, ارتباط خود با اینترنت را بررسی کنید.</string>
+    <string name="ok">تایید</string>
 
     <!-- START HOME-->
-    <string name="homeTitle">Home</string>
+    <string name="homeTitle">خانه</string>
     <string name="errorLoadData">Can\'t load data. check your connection</string>
-    <string name="welcomeTitle">Welcome to My Leitner</string>
-    <string name="welcomeText">This is our welcome text!, so welcome to Your Leitner</string>
+    <string name="welcomeTitle">به لایتنر من خوش آمدید</string>
+    <string name="welcomeText">این متن خوش آمدگویی به کاربر میباشد. به لایتنر من خوش آمدید</string>
     <!-- END HOME-->
 
 
@@ -34,6 +34,6 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">تنظیمات</string>
 
 </resources>

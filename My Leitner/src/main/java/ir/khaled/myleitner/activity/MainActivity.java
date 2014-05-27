@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import ir.khaled.myleitner.R;
+import ir.khaled.myleitner.dialog.DialogPublisher;
+import ir.khaled.myleitner.dialog.Welcome;
 import ir.khaled.myleitner.fragment.NavigationDrawerFragment;
 import ir.khaled.myleitner.helper.SocketHelper;
 
@@ -47,9 +49,11 @@ public class MainActivity extends ActionBarActivity
             @Override
             public void run() {
                 /** start socket connection to server */
-                SocketHelper.getInstance();
+                SocketHelper.getConnection();
             }
         }).start();
+
+        Welcome.showIfFirstRun(this);
     }
 
     @Override
@@ -106,6 +110,17 @@ public class MainActivity extends ActionBarActivity
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        DialogPublisher.getInstance().nothingIsShown();
+        super.onDestroy();
     }
 
     /**
