@@ -26,7 +26,7 @@ public class SocketHelper {
     /**
      * @return an instance of {@link ir.khaled.myleitner.helper.SocketHelper} to connect to server.
      */
-    public static SocketHelper getInstance() {
+    public static SocketHelper getConnection() {
         if (ourInstance == null || ourInstance.socket == null || !ourInstance.socket.isConnected() || ourInstance.socket.isClosed())
             ourInstance = new SocketHelper();
 
