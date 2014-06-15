@@ -13,4 +13,11 @@ public class Logger {
 
         Log.d(tag, log);
     }
+
+    public static void LogI(String tag, String log) {
+        if (!Config.debugMode)
+            return;
+
+        Log.i(tag, log);
+    }
 }

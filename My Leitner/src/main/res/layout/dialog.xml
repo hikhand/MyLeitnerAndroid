@@ -10,10 +10,10 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_centerInParent="true"
+        android:layout_margin="@dimen/large_tablet"
         android:background="@drawable/app_dialog_background"
-        android:layout_margin="@dimen/large_tablet">
+        android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/v_title"
@@ -25,7 +25,7 @@
         </LinearLayout>
 
         <View
-            android:id="@+id/v_lineContent"
+            android:id="@+id/v_lineTitle"
             android:layout_width="fill_parent"
             android:layout_height="@dimen/lineHeight"
             android:background="@color/lineColor"
@@ -33,12 +33,47 @@
             android:visibility="gone"/>
 
         <LinearLayout
+            android:id="@+id/v_loading"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <ir.khaled.myleitner.view.AppTextView
+                android:id="@+id/tv_loadingMessage"
+                style="@style/TextView.medium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/medium"
+                android:layout_weight="1"
+                android:padding="@dimen/small"
+                android:text="Medium Text"
+                android:visibility="gone"
+                android:gravity="center"/>
+
+            <ProgressBar
+                android:id="@+id/pb_loading"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/medium"
+                android:layout_marginRight="@dimen/medium"
+                android:visibility="gone"
+                android:indeterminate="true"/>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/v_content"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="start"
             android:orientation="vertical"
-            android:visibility="gone"/>
+            android:visibility="gone">
+
+        </LinearLayout>
 
         <View
             android:id="@+id/v_lineButtons"
@@ -59,8 +94,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dialog_buttonHeight"
                 android:layout_weight="1"
-                android:gravity="center"
                 android:background="@color/app_dialog_hover"
+                android:gravity="center"
                 android:text="Medium Text"
                 android:visibility="gone"/>
 
@@ -97,8 +132,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dialog_buttonHeight"
                 android:layout_weight="1"
-                android:gravity="center"
                 android:background="@color/app_dialog_hover"
+                android:gravity="center"
                 android:text="Medium Text"
                 android:visibility="gone"/>
         </LinearLayout>

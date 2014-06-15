@@ -5,6 +5,7 @@
     style="@style/TextView.medium"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
+    android:textAppearance="@android:style/TextAppearance.Medium"
     android:layout_height="wrap_content"
     android:layout_gravity="center_vertical|start"
     android:gravity="start"

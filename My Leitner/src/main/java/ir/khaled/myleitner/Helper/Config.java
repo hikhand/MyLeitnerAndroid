@@ -16,7 +16,6 @@ import ir.khaled.myleitner.view.AppEditText;
  * Created by kh.bakhtiari on 5/6/2014.
  */
 public class Config {
-    public static final int SERVER_PORT = 44485;
     public static final String urlWebService = "http://ws.iranapps.ir/v2/";
     public static final String SHARED_PREFS_NAME = "iranapps";
     public static boolean debugMode = true;//TODO make this false for realese
@@ -46,9 +45,6 @@ public class Config {
         return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
     }
 
-    public static boolean isEmailValid(String email) {
-        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
-    }
 
     public static void showKeyboard(AppEditText editText, Context context) {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);

@@ -1,7 +1,6 @@
 package ir.khaled.myleitner.helper;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
 
 import java.io.BufferedInputStream;
@@ -17,14 +16,13 @@ import java.net.URLConnection;
  * Created by kh.bakhtiari on 5/25/2014.
  */
 public class Util {
-    public static final String SERVER_ADDRESS = "192.168.1.41";
-
+    public static final String SERVER_ADDRESS = "192.168.1.3";
+    public static final int SERVER_PORT = 4455;
     private static final String FONT_UI = "font_ui.ttf";
     private static final String FONT_MULTI_LINE = "font_multi_line.ttf";
     private static Typeface fontUi;
     private static Typeface fontMultiLine;
     private static boolean isDownloadingFonts = false;
-    private static final String S_IS_FIRST_RUN = "isFirstRun";
 
     public static Typeface getAppFontUI(Context context) {
         String filePath = context.getFilesDir() + "/";
@@ -126,25 +124,8 @@ public class Util {
         }
     }
 
-
-    /**
-     * checks whether its apps first run or not </ br>
-     * if its first run it also disables the first run so the next time this method is called it would return false
-     *
-     * @param context used to get shared preferences
-     * @return true if is apps first run, false otherwise
-     */
-    public static boolean isAppFirstRun(Context context) {
-        boolean isFirstRun = StorageHelper.getSharedPreferences(context).getBoolean(S_IS_FIRST_RUN, true);
-
-        if (isFirstRun) {
-            SharedPreferences.Editor editor = StorageHelper.getSharedPreferencesEditor(context);
-            editor.putBoolean(S_IS_FIRST_RUN, false);
-            editor.commit();
-        }
-
-        return isFirstRun;
+    public static boolean isEmailValid(String email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
-
 
 }

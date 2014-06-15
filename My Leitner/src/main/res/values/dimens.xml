@@ -14,14 +14,14 @@
     <!-- END overall dimen -->
 
     <!-- START overall font sizes -->
-    <dimen name="font_small_v">8dp</dimen>
-    <dimen name="font_small">10dp</dimen>
-    <dimen name="font_small_x">12dp</dimen>
-    <dimen name="font_medium">14.5dp</dimen>
-    <dimen name="font_medium_x">15.5dp</dimen>
-    <dimen name="font_large">17dp</dimen>
-    <dimen name="font_large_x">20dp</dimen>
-    <dimen name="font_large_xx">50dp</dimen>
+    <dimen name="font_small_v">12sp</dimen>
+    <dimen name="font_small">14sp</dimen>
+    <dimen name="font_small_x">16sp</dimen>
+    <dimen name="font_medium">18sp</dimen>
+    <dimen name="font_medium_x">20sp</dimen>
+    <dimen name="font_large">22sp</dimen>
+    <dimen name="font_large_x">25sp</dimen>
+    <dimen name="font_large_xx">50sp</dimen>
     <!-- END overall font sizes -->
 
 

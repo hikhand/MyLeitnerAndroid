@@ -3,10 +3,12 @@ package ir.khaled.myleitner.dialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import ir.khaled.myleitner.R;
 import ir.khaled.myleitner.helper.Logger;
@@ -16,8 +18,8 @@ import ir.khaled.myleitner.view.AppTextView;
  * Created by kh.bakhtiari on 5/15/2014.
  */
 public class AppDialog extends Dialog {
-    private String LOG_NAME = "appDialog";
     protected Context context;
+    private String LOG_NAME = "appDialog";
     private AppDialogTransparent dialogBack;
     private View v_root;
     private ViewGroup vg_rootTitle;
@@ -25,10 +27,13 @@ public class AppDialog extends Dialog {
     private AppTextView btn_positive;
     private AppTextView btn_negative;
     private AppTextView btn_neutral;
-    private View v_lineContent;
+    private AppTextView tv_loadingMessage;
+    private View v_lineTitle;
     private View v_lineButtons;
     private View v_lineButtons_left;
     private View v_lineButtons_right;
+    private View v_loading;
+    private ProgressBar pb_loading;
 
     public AppDialog(Context context) {
         super(context, R.style.dialog_style);
@@ -74,15 +79,15 @@ public class AppDialog extends Dialog {
 
     @Override
     public void setTitle(CharSequence title) {
-        AppTextView tv_title = (AppTextView) LayoutInflater.from(context).inflate(R.layout.textview_overall, vg_rootTitle, false);
+        AppTextView tv_title = (AppTextView) LayoutInflater.from(context).inflate(R.layout.textview_overall, null);
         tv_title.setText(title);
         setTitle(tv_title);
     }
 
     @Override
     public void setTitle(int titleId) {
-        AppTextView tv_title = (AppTextView) LayoutInflater.from(context).inflate(R.layout.textview_overall, vg_rootTitle, false);
-        tv_title.setTextSize(context.getResources().getDimension(R.dimen.font_large));
+        AppTextView tv_title = (AppTextView) LayoutInflater.from(context).inflate(R.layout.textview_overall, null);
+        tv_title.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimensionPixelSize(R.dimen.font_large));
         tv_title.setText(context.getString(titleId));
         setTitle(tv_title);
     }
@@ -96,7 +101,7 @@ public class AppDialog extends Dialog {
             return;
         }
         vg_rootTitle.setVisibility(View.VISIBLE);
-
+        showLineTitle();
         vg_rootTitle.addView(viewTitle);
     }
 
@@ -117,20 +122,20 @@ public class AppDialog extends Dialog {
         if (vg_rootContent == null)
             vg_rootContent = (ViewGroup) v_root.findViewById(R.id.v_content);
 
+        vg_rootContent.removeAllViews();
         if (vg_rootContent.getChildCount() > 0) {
             Logger.LogD(LOG_NAME, "trying to set dialog's Content but it already has a Content");
             return;
         }
         vg_rootContent.setVisibility(View.VISIBLE);
         vg_rootContent.addView(viewContent);
-        showLineContent();
     }
 
-    private void showLineContent() {
-        if (v_lineContent == null)
-            v_lineContent = v_root.findViewById(R.id.v_lineContent);
+    private void showLineTitle() {
+        if (v_lineTitle == null)
+            v_lineTitle = v_root.findViewById(R.id.v_lineTitle);
 
-        v_lineContent.setVisibility(View.VISIBLE);
+        v_lineTitle.setVisibility(View.VISIBLE);
     }
 
     public void setPositiveButton(String text, View.OnClickListener onClick) {
@@ -231,9 +236,77 @@ public class AppDialog extends Dialog {
         v_lineButtons_right.setVisibility(View.VISIBLE);
     }
 
+    public void startLoading() {
+        startLoading(null);
+    }
+
+    public void startLoading(String message) {
+        if (v_loading == null)
+            v_loading = v_root.findViewById(R.id.v_loading);
+
+        v_loading.setVisibility(View.VISIBLE);
+
+        if (pb_loading == null)
+            pb_loading = (ProgressBar) v_root.findViewById(R.id.pb_loading);
+        pb_loading.setVisibility(View.VISIBLE);
+
+        if (message != null) {
+            if (tv_loadingMessage == null)
+                tv_loadingMessage = (AppTextView) v_root.findViewById(R.id.tv_loadingMessage);
+            tv_loadingMessage.setText(message);
+            tv_loadingMessage.setVisibility(View.VISIBLE);
+        }
+
+        hideContentView();
+    }
+
+    public void stopLoading() {
+        if (v_loading == null)
+            v_loading = v_root.findViewById(R.id.v_loading);
+
+        v_loading.setVisibility(View.GONE);
+
+        showContentView();
+    }
+
+    public void showError() {
+        showError(context.getString(R.string.errorConnection));
+    }
+
+    public void showError(String message) {
+        if (v_loading == null)
+            v_loading = v_root.findViewById(R.id.v_loading);
+
+        v_loading.setVisibility(View.VISIBLE);
+
+        if (pb_loading == null)
+            pb_loading = (ProgressBar) v_root.findViewById(R.id.pb_loading);
+        pb_loading.setVisibility(View.GONE);
+
+        if (tv_loadingMessage == null)
+            tv_loadingMessage = (AppTextView) v_root.findViewById(R.id.tv_loadingMessage);
+        tv_loadingMessage.setText(message);
+        tv_loadingMessage.setVisibility(View.VISIBLE);
+
+        hideContentView();
+    }
+
+    private void hideContentView() {
+        if (vg_rootContent == null)
+            vg_rootContent = (ViewGroup) v_root.findViewById(R.id.v_content);
+        vg_rootContent.setVisibility(View.GONE);
+    }
+
+    private void showContentView() {
+        if (vg_rootContent == null)
+            vg_rootContent = (ViewGroup) v_root.findViewById(R.id.v_content);
+        vg_rootContent.setVisibility(View.VISIBLE);
+    }
+
     public String getDialogName() {
         return LOG_NAME;
     }
+
     public static class Builder {
         Context context;
 

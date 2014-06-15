@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,9 +16,9 @@ import android.view.ViewGroup;
 
 import ir.khaled.myleitner.R;
 import ir.khaled.myleitner.dialog.DialogPublisher;
+import ir.khaled.myleitner.dialog.LastChanges;
 import ir.khaled.myleitner.dialog.Welcome;
 import ir.khaled.myleitner.fragment.NavigationDrawerFragment;
-import ir.khaled.myleitner.helper.SocketHelper;
 
 
 public class MainActivity extends ActionBarActivity
@@ -45,15 +46,8 @@ public class MainActivity extends ActionBarActivity
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                /** start socket connection to server */
-                SocketHelper.getConnection();
-            }
-        }).start();
-
         Welcome.showIfFirstRun(this);
+        LastChanges.showIfIsNewVersion(this);
     }
 
     @Override
@@ -110,11 +104,6 @@ public class MainActivity extends ActionBarActivity
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
     }
 
     @Override

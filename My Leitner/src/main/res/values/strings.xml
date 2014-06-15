@@ -10,16 +10,29 @@
     <!-- START HOME-->
     <string name="homeTitle">Home</string>
     <string name="errorLoadData">Can\'t load data. check your connection</string>
+
+    <!-- welcome -->
     <string name="welcomeTitle">Welcome to My Leitner</string>
-    <string name="welcomeText">This is our welcome text!, so welcome to Your Leitner</string>
+
+    <!-- last changes -->
+    <string name="lastChangesTitle">Last changes</string>
+    <string name="lastChangesLoadingMessage">Fetching this version\'s changes…</string>
     <!-- END HOME-->
 
+
+
+
+    <!-- START USER -->
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <!-- END USER -->
 
 
 
     <!-- START LEITNER -->
     <string name="leitnerTitle"></string>
     <!-- END LEITNER -->
+
 
 
 
