@@ -29,6 +29,20 @@
 
 
 
+
+    <!--START MAIN -->
+    <!--END MAIN -->
+
+
+
+
+    <!-- START ADD_CARD -->
+    <string name="addCard_title">Add a card</string>
+    <string name="action_saveCard">Save card</string>
+    <string name="action_addCard">Add card</string>
+    <!-- END ADD_CARD -->
+
+
     <!-- START LEITNER -->
     <string name="leitnerTitle"></string>
     <!-- END LEITNER -->

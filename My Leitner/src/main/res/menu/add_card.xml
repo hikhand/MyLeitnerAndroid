@@ -3,7 +3,7 @@
       xmlns:tools="http://schemas.android.com/tools"
       tools:context="ir.khaled.myleitner.activity.MainActivity">
     <item
-        android:id="@+id/action_addCard"
-        android:title="@string/action_addCard"
+        android:id="@+id/action_saveCard"
+        android:title="@string/action_saveCard"
         app:showAsAction="always"/>
 </menu>

@@ -1,37 +1,10 @@
-<LinearLayout
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <LinearLayout
-        android:id="@+id/ll_loading"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="@dimen/medium"
-        android:background="#ffe6e564">
-
-        <TextView
-            android:id="@+id/tv_errorText"
-            style="@style/EditText.medium"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/error"
-            android:layout_marginEnd="@dimen/small"
-            android:layout_gravity="center_vertical"/>
-
-        <Button
-            android:id="@+id/bt_retry"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/retry"
-            android:layout_gravity="center_vertical"/>
-
-    </LinearLayout>
-
-    <ir.khaled.myleitner.view.AppTextView
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/medium"/>
-</LinearLayout>
+<ListView
+    android:id="@+id/lv_front"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:scrollbarStyle="outsideOverlay"
+    android:paddingLeft="@dimen/medium"
+    android:paddingRight="@dimen/medium"
+    android:divider="@android:color/transparent"
+    android:dividerHeight="@dimen/medium"
+    android:layout_height="wrap_content"/>

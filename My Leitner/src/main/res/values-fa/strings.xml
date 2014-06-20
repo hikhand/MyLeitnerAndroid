@@ -16,6 +16,21 @@
 
 
 
+    <!-- START ADD_CARD -->
+    <string name="addCard_title">افزودن کارت</string>
+    <string name="action_saveCard">ذخیره کارت</string>
+    <string name="action_addCard">افزودن کارت</string>
+    <!-- END ADD_CARD -->
+
+
+
+
+    <!--START MAIN -->
+    <!--END MAIN -->
+
+
+
+
     <!-- START LEITNER -->
     <string name="leitnerTitle"></string>
     <!-- END LEITNER -->
