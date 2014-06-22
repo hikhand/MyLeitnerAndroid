@@ -81,11 +81,13 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
         switch (currentFragment) {
             case FRAGMENT_MAIN:
                 actionBar.setDisplayShowHomeEnabled(true);
+                mNavigationDrawerFragment.showAsUp(false);
                 mNavigationDrawerFragment.unlockDrawer();
                 break;
 
             case FRAGMENT_ADD_CARD:
                 actionBar.setDisplayHomeAsUpEnabled(true);
+                mNavigationDrawerFragment.showAsUp(true);
                 mNavigationDrawerFragment.lockDrawer();
                 break;
 
@@ -94,6 +96,12 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
         }
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        //This method is called when the up button is pressed. Just the pop back stack.
+        getSupportFragmentManager().popBackStack();
+        return true;
+    }
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {

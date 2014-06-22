@@ -8,80 +8,100 @@
     android:orientation="vertical"
     >
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/ll_title"
-        android:layout_marginTop="@dimen/large"
-        >
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <ir.khaled.myleitner.view.AppTextView
-            android:id="@+id/tv_title"
-            style="@style/TextView.medium.larger"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/large"
-            android:text="Title"/>
-
-        <ir.khaled.myleitner.view.AppEditText
-            android:id="@+id/et_title"
-            style="@style/EditText.Box"
+        <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="sdflkjs dkfl ljsf"/>
-    </LinearLayout>
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/ll_front"
-        android:layout_marginTop="@dimen/medium">
+            <LinearLayout
+                android:id="@+id/ll_title"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/large"
+                android:orientation="vertical"
+                >
 
-        <ir.khaled.myleitner.view.AppTextView
-            android:id="@+id/tv_front"
-            style="@style/TextView.medium.larger"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/large"
-            android:text="Front"/>
+                <ir.khaled.myleitner.view.AppTextView
+                    android:id="@+id/tv_title"
+                    style="@style/TextView.medium.larger"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/large"
+                    android:text="Title"/>
 
-        <ir.khaled.myleitner.view.AppEditText
-            android:id="@+id/et_front"
-            style="@style/EditText.Box"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Text for front of the card"
-            android:minHeight="96dp"
-            android:gravity="top"/>
+                <ir.khaled.myleitner.view.AppEditText
+                    android:id="@+id/et_title"
+                    style="@style/EditText.Box"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="sdflkjs dkfl ljsf"/>
+            </LinearLayout>
 
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_front"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium"
+                android:orientation="vertical">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/ll_back"
-        android:layout_marginTop="@dimen/medium">
+                <ir.khaled.myleitner.view.AppTextView
+                    android:id="@+id/tv_front"
+                    style="@style/TextView.medium.larger"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/large"
+                    android:text="Front"/>
 
-        <ir.khaled.myleitner.view.AppTextView
-            android:id="@+id/tv_back"
-            style="@style/TextView.medium.larger"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/large"
-            android:text="Back"/>
+                <ir.khaled.myleitner.view.AppEditText
+                    android:id="@+id/et_front"
+                    style="@style/EditText.Box"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:minHeight="96dp"
+                    android:text="Text for front of the card"/>
 
-        <ir.khaled.myleitner.view.AppEditText
-            android:id="@+id/et_back"
-            style="@style/EditText.Box"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Text for back of the card"
-            android:gravity="top"
-            android:minHeight="96dp"/>
+            </LinearLayout>
 
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_back"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium"
+                android:orientation="vertical">
+
+                <ir.khaled.myleitner.view.AppTextView
+                    android:id="@+id/tv_back"
+                    style="@style/TextView.medium.larger"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/large"
+                    android:text="Back"/>
+
+                <ir.khaled.myleitner.view.AppEditText
+                    android:id="@+id/et_back"
+                    style="@style/EditText.Box"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:minHeight="96dp"
+                    android:text="Text for back of the card"/>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_saveCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_margin="@dimen/medium"
+                android:text="@string/action_saveCard"/>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
