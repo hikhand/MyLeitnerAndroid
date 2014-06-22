@@ -13,7 +13,6 @@ import java.lang.reflect.Type;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
-import ir.khaled.myleitner.helper.Config;
 import ir.khaled.myleitner.helper.ErrorHelper;
 import ir.khaled.myleitner.helper.Logger;
 import ir.khaled.myleitner.helper.Util;
@@ -32,20 +31,20 @@ public class WebClient<T> extends Thread {
     private Socket socket;
     private WebRequest request;
     private ResponseReceiveListener<T> receiveListener;
-    private boolean closeImmediately;
+    private Connection connectionType;
     private Type typeResult;
     private Context context;
 
     /**
      * @param request
-     * @param closeImmediately
+     * @param connectionType
      * @param typeResult       Type myType = new TypeToken<WebResponse<yourClass>>() {}.getType();
      * @param receiveListener
      */
-    public WebClient(Context context, WebRequest request, boolean closeImmediately, Type typeResult, ResponseReceiveListener<T> receiveListener) {
+    public WebClient(Context context, WebRequest request, Connection connectionType, Type typeResult, ResponseReceiveListener<T> receiveListener) {
         this.request = request;
         this.receiveListener = receiveListener;
-        this.closeImmediately = closeImmediately;
+        this.connectionType = connectionType;
         this.typeResult = typeResult;
         this.context = context;
         if (requestPing == null)
@@ -92,12 +91,12 @@ public class WebClient<T> extends Thread {
      * if the connection is set to be closed immediately closes the connection.
      */
     private void closeConnection() throws IOException {
-        if (closeImmediately)
+        if (connectionType == Connection.IMMEDIATELY)
             socket.close();
     }
 
     private boolean getData(Socket socket, String jsonToSend,  boolean returnToListener) throws IOException {
-        if (closeImmediately) {
+        if (connectionType == Connection.IMMEDIATELY) {
             WebResponse<T> response = getDataB(socket, jsonToSend);
             closeConnection();
             return handleResponse(response, returnToListener);
@@ -152,7 +151,7 @@ public class WebClient<T> extends Thread {
     }
 
     private void defineSocketConnection() throws IOException {
-        if (closeImmediately) {
+        if (connectionType == Connection.IMMEDIATELY) {
             socket = getNewSocket();
         } else socket = getSocketOpen();
     }
@@ -184,4 +183,8 @@ public class WebClient<T> extends Thread {
         return false;
     }
 
+    public static enum Connection {
+        PERMANENT,
+        IMMEDIATELY
+    }
 }

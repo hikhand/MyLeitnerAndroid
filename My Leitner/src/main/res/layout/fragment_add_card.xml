@@ -94,7 +94,7 @@
 
             </LinearLayout>
 
-            <Button
+            <ir.khaled.myleitner.view.AppButton
                 android:id="@+id/btn_saveCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -72,7 +72,7 @@ public class LastChanges extends AppDialog implements ResponseReceiveListener<La
 
         Type myType = new TypeToken<WebResponse<LastChanges>>() {
         }.getType();
-        WebClient<LastChanges> webClient = new WebClient<LastChanges>(context, request, false, myType, this);
+        WebClient<LastChanges> webClient = new WebClient<LastChanges>(context, request, WebClient.Connection.PERMANENT, myType, this);
         webClient.start();
     }
 

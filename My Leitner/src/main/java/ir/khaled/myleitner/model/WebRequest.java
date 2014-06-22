@@ -16,6 +16,7 @@ public class WebRequest {
     public static final String REQUEST_WELCOME = "welcome";
     public static final String REQUEST_CHANGES = "lastChanges";
     public static final String REQUEST_REGISTER_DEVICE = "registerDevice";
+    public static final String REQUEST_ADD_CARD = "addCard";
     private static final String PARAM_UDK = "udk";
     @Expose
     String requestName;

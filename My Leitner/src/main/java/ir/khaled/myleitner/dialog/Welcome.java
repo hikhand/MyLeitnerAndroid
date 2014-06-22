@@ -69,7 +69,7 @@ public class Welcome extends AppDialog implements ResponseReceiveListener<Welcom
 
         Type myType = new TypeToken<WebResponse<Welcome>>() {
         }.getType();
-        WebClient<Welcome> webClient = new WebClient<Welcome>(context, request, false, myType, this);
+        WebClient<Welcome> webClient = new WebClient<Welcome>(context, request, WebClient.Connection.PERMANENT, myType, this);
         webClient.start();
     }
 
