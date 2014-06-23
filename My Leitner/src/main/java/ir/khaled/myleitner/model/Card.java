@@ -3,10 +3,12 @@ package ir.khaled.myleitner.model;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 import ir.khaled.myleitner.interfaces.ResponseReceiveListener;
 
@@ -14,9 +16,8 @@ import ir.khaled.myleitner.interfaces.ResponseReceiveListener;
  * Created by khaled on 6/22/2014.
  */
 public class Card {
-    private static final String PARAM_CARD_TITLE = "cardTitle";
-    private static final String PARAM_CARD_FRONT = "cardFront";
-    private static final String PARAM_CARD_BACK = "cardBack";
+    private static final String PARAM_CARD = "card";
+    private static Gson gson = new Gson();
     //    public int id;
 //    public int userId;
 //    public int leitnerId;
@@ -44,7 +45,7 @@ public class Card {
         this.back = back;
     }
 
-    public static void saveCard(Context context, Card card, SaveCardListener saveCardListener) {
+    public static void saveCard(Context context, final Card card, SaveCardListener saveCardListener) {
         if (TextUtils.isEmpty(card.title)) {
             saveCardListener.saveCardInvalidName();
             return;
@@ -58,14 +59,18 @@ public class Card {
             return;
         }
 
-        WebRequest request = new WebRequest(context, WebRequest.REQUEST_ADD_CARD);
-        request.addParam(PARAM_CARD_TITLE, card.title);
-        request.addParam(PARAM_CARD_FRONT, card.front);
-        request.addParam(PARAM_CARD_BACK, card.back);
+        WebRequest request = new WebRequest(context, WebRequest.REQUEST_ADD_CARD) {
+            @Override
+            public ArrayList<WebRequest.Param> getExtraParams() {
+                ArrayList<WebRequest.Param> extraParams = new ArrayList<Param>();
+                extraParams.add(new Param(PARAM_CARD, gson.toJson(card)));
+                return extraParams;
+            }
+        };
 
         Type myType = new TypeToken<WebResponse<Boolean>>() {
         }.getType();
-        WebClient<Boolean> webClient = new WebClient<Boolean>(context, request, WebClient.Connection.IMMEDIATELY, myType, saveCardListener);
+        WebClient<Boolean> webClient = new WebClient<Boolean>(context, request, WebClient.Connection.PERMANENT, myType, saveCardListener);
         webClient.start();
     }
 

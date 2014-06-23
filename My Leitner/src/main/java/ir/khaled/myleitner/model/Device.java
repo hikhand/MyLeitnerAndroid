@@ -81,7 +81,7 @@ public class Device {
             // Create Hex String
             StringBuffer hexString = new StringBuffer();
             for (int i = 0; i < messageDigest.length; i++)
-                hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
+                hexString.append(Integer.toString((messageDigest[i] & 0xff) + 0x100, 16).substring(1));
             return hexString.toString();
 
         } catch (NoSuchAlgorithmException e) {

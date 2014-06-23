@@ -39,11 +39,26 @@ public class WebRequest {
         paramChanged = true;
     }
 
+    /**
+     * override this method to add params which need to be added from worker thread like making a json by gson
+     */
+    public ArrayList<Param> getExtraParams() {
+        return null;
+    }
+
+    /**
+     * this method shouldn't be called from main thread
+     * @return
+     */
     public String getJsonParams() {
         if (!paramChanged)
             return jsonParams;
 
-        jsonParams = getGson().toJson(this);
+        ArrayList<Param> extraParams = getExtraParams();
+        if (extraParams != null)
+            params.addAll(getExtraParams());
+
+        jsonParams = getGson().toJson(this, WebRequest.class);
         paramChanged = false;
 
         return jsonParams;
@@ -56,7 +71,7 @@ public class WebRequest {
 
     }
 
-    private class Param {
+    public class Param {
         @Expose
         public String name;
         @Expose
