@@ -2,7 +2,6 @@ package ir.khaled.myleitner.dialog;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Handler;
 import android.view.View;
 
 import com.google.gson.annotations.Expose;
@@ -12,21 +11,20 @@ import java.lang.reflect.Type;
 
 import ir.khaled.myleitner.R;
 import ir.khaled.myleitner.helper.StorageHelper;
-import ir.khaled.myleitner.interfaces.ResponseReceiveListener;
+import ir.khaled.myleitner.interfaces.ResponseListener;
 import ir.khaled.myleitner.model.Device;
-import ir.khaled.myleitner.model.WebClient;
-import ir.khaled.myleitner.model.WebRequest;
-import ir.khaled.myleitner.model.WebResponse;
+import ir.khaled.myleitner.webservice.Request;
+import ir.khaled.myleitner.webservice.Response;
+import ir.khaled.myleitner.webservice.WebClient;
 
 /**
  * Created by kh.bakhtiari on 5/25/2014.
  */
-public class Welcome extends AppDialog implements ResponseReceiveListener<Welcome> {
+public class Welcome extends AppDialog implements ResponseListener<Welcome> {
     private static final String S_IS_FIRST_RUN = "isFirstRun";
     private static final String PARAM_VERSION_CODE = "versionCode";
     @Expose
     private String message;
-    private Handler handlerUI = new Handler();
 
     public Welcome(Context context) {
         super(context);
@@ -64,10 +62,10 @@ public class Welcome extends AppDialog implements ResponseReceiveListener<Welcom
 
 
     private void getWelcome() {
-        WebRequest request = new WebRequest(context, WebRequest.REQUEST_WELCOME);
+        Request request = new Request(context, Request.REQUEST_WELCOME);
         request.addParam(PARAM_VERSION_CODE, Device.getInstance(context).appVersionCode + "");
 
-        Type myType = new TypeToken<WebResponse<Welcome>>() {
+        Type myType = new TypeToken<Response<Welcome>>() {
         }.getType();
         WebClient<Welcome> webClient = new WebClient<Welcome>(context, request, WebClient.Connection.PERMANENT, myType, this);
         webClient.start();
@@ -90,23 +88,13 @@ public class Welcome extends AppDialog implements ResponseReceiveListener<Welcom
     }
 
     @Override
-    public void onResponseReceived(final Welcome welcome) {
-        handlerUI.post(new Runnable() {
-            @Override
-            public void run() {
-                stopLoading();
-                setContentView(welcome.message);
-            }
-        });
+    public void onResponse(Welcome welcome) {
+        stopLoading();
+        setContentView(welcome.message);
     }
 
     @Override
-    public void onResponseReceiveFailed(WebResponse<Welcome> response) {
-        handlerUI.post(new Runnable() {
-            @Override
-            public void run() {
-                showError();
-            }
-        });
+    public void onResponseError(Response<Welcome> response) {
+        showError();
     }
 }

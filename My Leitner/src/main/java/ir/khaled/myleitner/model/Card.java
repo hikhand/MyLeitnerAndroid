@@ -2,6 +2,8 @@ package ir.khaled.myleitner.model;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.view.View;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
@@ -10,7 +12,13 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-import ir.khaled.myleitner.interfaces.ResponseReceiveListener;
+import ir.khaled.myleitner.R;
+import ir.khaled.myleitner.dialog.AppDialog;
+import ir.khaled.myleitner.fragment.AddCardFragment;
+import ir.khaled.myleitner.interfaces.ResponseListener;
+import ir.khaled.myleitner.webservice.Request;
+import ir.khaled.myleitner.webservice.Response;
+import ir.khaled.myleitner.webservice.WebClient;
 
 /**
  * Created by khaled on 6/22/2014.
@@ -45,43 +53,106 @@ public class Card {
         this.back = back;
     }
 
-    public static void saveCard(Context context, final Card card, SaveCardListener saveCardListener) {
-        if (TextUtils.isEmpty(card.title)) {
-            saveCardListener.saveCardInvalidName();
-            return;
-        }
-        if (TextUtils.isEmpty(card.front)) {
-            saveCardListener.saveCardInvalidFront();
-            return;
-        }
-        if (TextUtils.isEmpty(card.back)) {
-            saveCardListener.saveCardInvalidBack();
-            return;
+    public static class AddCard extends AppDialog implements ResponseListener<Boolean>, View.OnClickListener {
+        private Context context;
+        private Card card;
+        private AddCardFragment.ViewHolder viewHolder;
+        private OnCardAddListener cardAddListener;
+
+        public AddCard(Context context, AddCardFragment.ViewHolder viewHolder, OnCardAddListener cardAddListener) {
+            super(context);
+            this.context = context;
+            this.card = new Card(
+                    viewHolder.et_title.getText().toString(),
+                    viewHolder.et_front.getText().toString(),
+                    viewHolder.et_back.getText().toString()
+            );
+            this.viewHolder = viewHolder;
+            this.cardAddListener = cardAddListener;
         }
 
-        WebRequest request = new WebRequest(context, WebRequest.REQUEST_ADD_CARD) {
-            @Override
-            public ArrayList<WebRequest.Param> getExtraParams() {
-                ArrayList<WebRequest.Param> extraParams = new ArrayList<Param>();
-                extraParams.add(new Param(PARAM_CARD, gson.toJson(card)));
-                return extraParams;
+        public void addCard() {
+            if (saveCard(context, card)) {
+                startLoading(context.getString(R.string.addCardLoading));
+                show();
             }
-        };
+        }
 
-        Type myType = new TypeToken<WebResponse<Boolean>>() {
-        }.getType();
-        WebClient<Boolean> webClient = new WebClient<Boolean>(context, request, WebClient.Connection.PERMANENT, myType, saveCardListener);
-        webClient.start();
-    }
+        /**
+         *
+         * @param context
+         * @param card
+         * @return true if starts webservice, false otherwise
+         */
+        private boolean saveCard(Context context, final Card card) {
+            if (TextUtils.isEmpty(card.title)) {
+                saveCardInvalidTitle();
+                return false;
+            }
+            if (TextUtils.isEmpty(card.front)) {
+                saveCardInvalidFront();
+                return false;
+            }
+            if (TextUtils.isEmpty(card.back)) {
+                saveCardInvalidBack();
+                return false;
+            }
 
+            Request request = new Request(context, Request.REQUEST_ADD_CARD) {
+                @Override
+                public ArrayList<Param> getExtraParams() {
+                    ArrayList<Request.Param> extraParams = new ArrayList<Param>();
+                    extraParams.add(new Param(PARAM_CARD, gson.toJson(card)));
+                    return extraParams;
+                }
+            };
 
+            Type myType = new TypeToken<Response<Boolean>>() {
+            }.getType();
+            WebClient<Boolean> webClient = new WebClient<Boolean>(context, request, WebClient.Connection.PERMANENT, myType, this);
+            webClient.start();
+            return true;
+        }
 
-    public static interface SaveCardListener extends ResponseReceiveListener<Boolean> {
+        public void saveCardInvalidTitle() {
+            viewHolder.et_title.setError(context.getString(R.string.invalidTitle));
+        }
 
-        public void saveCardInvalidName();
+        public void saveCardInvalidFront() {
+            viewHolder.et_front.setError(context.getString(R.string.invalidFront));
+        }
 
-        public void saveCardInvalidFront();
+        public void saveCardInvalidBack() {
+            viewHolder.et_back.setError(context.getString(R.string.invalidBack));
+        }
 
-        public void saveCardInvalidBack();
+        @Override
+        public void onResponse(Boolean response) {
+            dismiss();
+            Toast.makeText(context, context.getString(R.string.cardAdded), Toast.LENGTH_SHORT).show();
+            cardAddListener.onCardAdded();
+        }
+
+        @Override
+        public void onResponseError(Response<Boolean> response) {
+            stopLoading();
+            showError(context.getString(R.string.cardAddFailed), context.getString(R.string.retry), context.getString(R.string.cancel), this, this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (view.getId() == ID_BTN_POS) {
+                addCard();
+            } else {
+                dismiss();
+                cardAddListener.onCardAddCanceled();
+            }
+        }
+
+        public static interface OnCardAddListener {
+            public void onCardAdded();
+
+            public void onCardAddCanceled();
+        }
     }
 }

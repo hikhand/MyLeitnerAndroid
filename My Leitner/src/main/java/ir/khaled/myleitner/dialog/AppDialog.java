@@ -18,6 +18,8 @@ import ir.khaled.myleitner.view.AppTextView;
  * Created by kh.bakhtiari on 5/15/2014.
  */
 public class AppDialog extends Dialog {
+    public static final int ID_BTN_POS = R.id.btn_right;
+    public static final int ID_BTN_NEG = R.id.btn_left;
     protected Context context;
     private String LOG_NAME = "appDialog";
     private AppDialogTransparent dialogBack;
@@ -34,6 +36,7 @@ public class AppDialog extends Dialog {
     private View v_lineButtons_right;
     private View v_loading;
     private ProgressBar pb_loading;
+    private boolean buttonsSet;
 
     public AppDialog(Context context) {
         super(context, R.style.dialog_style);
@@ -139,6 +142,7 @@ public class AppDialog extends Dialog {
     }
 
     public void setPositiveButton(String text, View.OnClickListener onClick) {
+        buttonsSet = true;
         showLineButtons();
 
         if (btn_positive == null)
@@ -159,13 +163,22 @@ public class AppDialog extends Dialog {
         showLinesButtons();
     }
 
+    private void hidePositiveButton() {
+        if (btn_positive == null)
+            btn_positive = (AppTextView) v_root.findViewById(R.id.btn_right);
+
+        btn_positive.setVisibility(View.GONE);
+    }
+
     public void setNegativeButton(String text, View.OnClickListener onClick) {
+        buttonsSet = true;
         showLineButtons();
 
         if (btn_negative == null)
             btn_negative = (AppTextView) v_root.findViewById(R.id.btn_left);
 
         btn_negative.setVisibility(View.VISIBLE);
+        btn_negative.setText(text);
 
         if (onClick == null) {
             btn_negative.setOnClickListener(new View.OnClickListener() {
@@ -180,9 +193,26 @@ public class AppDialog extends Dialog {
         showLinesButtons();
     }
 
+    private void hideNegativeButton() {
+        if (btn_negative == null)
+            btn_negative = (AppTextView) v_root.findViewById(R.id.btn_left);
+
+        btn_negative.setVisibility(View.GONE);
+    }
+
     public void setNeutralButton(String text, View.OnClickListener onClick) throws IllegalAccessException {
+        buttonsSet = true;
         showLinesButtons();
         throw new IllegalAccessException("No Neutral Button");
+    }
+
+    public void hideButtons() {
+        v_root.findViewById(R.id.ll_buttons).setVisibility(View.GONE);
+//        hideLineButtons();
+//        hideLineButtonsLeft();
+//        hideLineButtonsRight();
+//        hideNegativeButton();
+//        hidePositiveButton();
     }
 
     private void showLineButtons() {
@@ -190,6 +220,13 @@ public class AppDialog extends Dialog {
             v_lineButtons = v_root.findViewById(R.id.v_lineButtons);
 
         v_lineButtons.setVisibility(View.VISIBLE);
+    }
+
+    private void hideLineButtons() {
+        if (v_lineButtons == null)
+            v_lineButtons = v_root.findViewById(R.id.v_lineButtons);
+
+        v_lineButtons.setVisibility(View.GONE);
     }
 
     private void showLinesButtons() {
@@ -229,11 +266,25 @@ public class AppDialog extends Dialog {
         v_lineButtons_left.setVisibility(View.VISIBLE);
     }
 
+    private void hideLineButtonsLeft() {
+        if (v_lineButtons_left == null)
+            v_lineButtons_left = v_root.findViewById(R.id.v_lineLeft);
+
+        v_lineButtons_left.setVisibility(View.GONE);
+    }
+
     private void showLineButtonsRight() {
         if (v_lineButtons_right == null)
             v_lineButtons_right = v_root.findViewById(R.id.v_lineRight);
 
         v_lineButtons_right.setVisibility(View.VISIBLE);
+    }
+
+    private void hideLineButtonsRight() {
+        if (v_lineButtons_right == null)
+            v_lineButtons_right = v_root.findViewById(R.id.v_lineRight);
+
+        v_lineButtons_right.setVisibility(View.GONE);
     }
 
     public void startLoading() {
@@ -258,6 +309,7 @@ public class AppDialog extends Dialog {
         }
 
         hideContentView();
+        hideButtons();
     }
 
     public void stopLoading() {
@@ -267,6 +319,9 @@ public class AppDialog extends Dialog {
         v_loading.setVisibility(View.GONE);
 
         showContentView();
+        if (buttonsSet)
+            v_root.findViewById(R.id.ll_buttons).setVisibility(View.VISIBLE);
+
     }
 
     public void showError() {
@@ -274,6 +329,14 @@ public class AppDialog extends Dialog {
     }
 
     public void showError(String message) {
+        showError(message, null, null);
+    }
+
+    public void showError(String message, String textButton, View.OnClickListener onClickListener) {
+        showError(message, textButton, null, onClickListener, null);
+    }
+
+    public void showError(String message, String textButtonPos, String textButtonNeg, View.OnClickListener onClickPos, View.OnClickListener onClickNeg) {
         if (v_loading == null)
             v_loading = v_root.findViewById(R.id.v_loading);
 
@@ -288,7 +351,15 @@ public class AppDialog extends Dialog {
         tv_loadingMessage.setText(message);
         tv_loadingMessage.setVisibility(View.VISIBLE);
 
+        textButtonPos = textButtonPos == null ? context.getString(R.string.ok) : textButtonPos;
+        setPositiveButton(textButtonPos, onClickPos);
+
+        if (onClickNeg != null) {
+            textButtonNeg = textButtonNeg == null ? context.getString(R.string.cancel) : textButtonNeg;
+            setNegativeButton(textButtonNeg, onClickNeg);
+        }
         hideContentView();
+        v_root.findViewById(R.id.ll_buttons).setVisibility(View.VISIBLE);
     }
 
     private void hideContentView() {

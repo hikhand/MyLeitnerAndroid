@@ -29,5 +29,10 @@
 
     <!-- START DIALOG -->
     <dimen name="dialog_buttonHeight">44dp</dimen>
+    <dimen name="dialog_LoadingHeight">48dp</dimen>
     <!-- END DIALOG -->
+
+
+
+
 </resources>

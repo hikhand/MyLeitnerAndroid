@@ -2,7 +2,6 @@ package ir.khaled.myleitner.dialog;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Handler;
 import android.view.View;
 
 import com.google.gson.annotations.Expose;
@@ -12,21 +11,20 @@ import java.lang.reflect.Type;
 
 import ir.khaled.myleitner.R;
 import ir.khaled.myleitner.helper.StorageHelper;
-import ir.khaled.myleitner.interfaces.ResponseReceiveListener;
+import ir.khaled.myleitner.interfaces.ResponseListener;
 import ir.khaled.myleitner.model.Device;
-import ir.khaled.myleitner.model.WebClient;
-import ir.khaled.myleitner.model.WebRequest;
-import ir.khaled.myleitner.model.WebResponse;
+import ir.khaled.myleitner.webservice.Request;
+import ir.khaled.myleitner.webservice.Response;
+import ir.khaled.myleitner.webservice.WebClient;
 
 /**
  * Created by kh.bakhtiari on 5/27/2014.
  */
-public class LastChanges extends AppDialog implements ResponseReceiveListener<LastChanges> {
+public class LastChanges extends AppDialog implements ResponseListener<LastChanges> {
     private static final String S_LAST_VERSION_CODE = "lastVersionCode";
     private static final String PARAM_VERSION_CODE = "versionCode";
     @Expose
     private String lastChanges;
-    private Handler handlerUI = new Handler();
 
     public LastChanges(Context context) {
         super(context);
@@ -67,10 +65,10 @@ public class LastChanges extends AppDialog implements ResponseReceiveListener<La
      * start a new thread to get lastChanges
      */
     private void getChanges() {
-        WebRequest request = new WebRequest(context, WebRequest.REQUEST_CHANGES);
+        Request request = new Request(context, Request.REQUEST_CHANGES);
         request.addParam(PARAM_VERSION_CODE, Device.getInstance(context).appVersionCode + "");
 
-        Type myType = new TypeToken<WebResponse<LastChanges>>() {
+        Type myType = new TypeToken<Response<LastChanges>>() {
         }.getType();
         WebClient<LastChanges> webClient = new WebClient<LastChanges>(context, request, WebClient.Connection.PERMANENT, myType, this);
         webClient.start();
@@ -102,24 +100,14 @@ public class LastChanges extends AppDialog implements ResponseReceiveListener<La
     }
 
     @Override
-    public void onResponseReceived(final LastChanges changes) {
-        handlerUI.post(new Runnable() {
-            @Override
-            public void run() {
-                stopLoading();
-                setContentView(changes.lastChanges);
-            }
-        });
+    public void onResponse(LastChanges changes) {
+        stopLoading();
+        setContentView(changes.lastChanges);
     }
 
 
     @Override
-    public void onResponseReceiveFailed(WebResponse<LastChanges> response) {
-        handlerUI.post(new Runnable() {
-            @Override
-            public void run() {
-                showError();
-            }
-        });
+    public void onResponseError(Response<LastChanges> response) {
+        showError();
     }
 }

@@ -61,7 +61,11 @@ public class MainFragment extends Fragment implements FragmentManager.OnBackStac
 
     @Override
     public void onBackStackChanged() {
-        if (getFragmentManager().getBackStackEntryCount() == 0) {
+        FragmentManager fragmentManager = getFragmentManager();
+        if (fragmentManager == null)
+            return;
+
+        if (fragmentManager.getBackStackEntryCount() == 0){
             //if nothing is in the fragment backstack meaning main fragment is on screen
             fragmentAttached();
         }

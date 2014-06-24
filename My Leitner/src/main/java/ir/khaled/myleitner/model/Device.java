@@ -28,6 +28,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.regex.Pattern;
 
+import ir.khaled.myleitner.webservice.Request;
+
 /**
  * Created by kh.bakhtiari on 10/29/13.
  */
@@ -103,10 +105,10 @@ public class Device {
         return jsonString;
     }
 
-    public static WebRequest getRequestRegisterDevice(Context context) {
-        WebRequest webRequest = new WebRequest(context, WebRequest.REQUEST_REGISTER_DEVICE);
-        webRequest.addParam(PARAM_DEVICE_INFO, createJson(context));
-        return webRequest;
+    public static Request getRequestRegisterDevice(Context context) {
+        Request request = new Request(context, Request.REQUEST_REGISTER_DEVICE);
+        request.addParam(PARAM_DEVICE_INFO, createJson(context));
+        return request;
     }
 
     public DeviceInfo getDeviceInfo() {

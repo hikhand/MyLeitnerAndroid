@@ -5,7 +5,9 @@
     <string name="retry">Retry</string>
     <string name="error">Operation has encountered a problem</string>
     <string name="errorConnection">can\'t connect to server. check your connection.</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="loading">In progress …</string>
 
     <!-- START HOME-->
     <string name="homeTitle">Home</string>
@@ -40,6 +42,12 @@
     <string name="addCard_title">Add a card</string>
     <string name="action_saveCard">Save card</string>
     <string name="action_addCard">Add card</string>
+    <string name="invalidTitle">Please set a title for the card</string>
+    <string name="invalidFront">Please fill card\'s front side</string>
+    <string name="invalidBack">Please fill card\'s back side</string>
+    <string name="addCardLoading">Adding the card …</string>
+    <string name="cardAdded">Card successfully added.</string>
+    <string name="cardAddFailed">Adding card encountered a problem.</string>
     <!-- END ADD_CARD -->
 
 

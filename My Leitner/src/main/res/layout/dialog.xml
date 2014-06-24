@@ -8,7 +8,7 @@
     <LinearLayout
         android:id="@+id/v_root"
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_margin="@dimen/large_tablet"
@@ -37,6 +37,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:gravity="center_horizontal"
+            android:minHeight="@dimen/dialog_LoadingHeight"
             android:orientation="horizontal"
             android:visibility="gone">
 
@@ -51,15 +52,14 @@
                 android:padding="@dimen/small"
                 android:text="Medium Text"
                 android:visibility="gone"
-                android:gravity="center"/>
+                android:gravity="start"/>
 
             <ProgressBar
                 android:id="@+id/pb_loading"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/medium"
-                android:layout_marginRight="@dimen/medium"
+                android:layout_margin="@dimen/medium"
                 android:visibility="gone"
                 android:indeterminate="true"/>
 
@@ -84,19 +84,20 @@
             android:visibility="gone"/>
 
         <LinearLayout
+            android:id="@+id/ll_buttons"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <ir.khaled.myleitner.view.AppTextView
                 android:id="@+id/btn_left"
-                style="@style/TextView.large"
+                style="@style/TextView.medium.larger"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dialog_buttonHeight"
                 android:layout_weight="1"
                 android:background="@color/app_dialog_hover"
                 android:gravity="center"
-                android:text="Medium Text"
+                android:text="Left"
                 android:visibility="gone"/>
 
             <View
@@ -109,13 +110,13 @@
 
             <ir.khaled.myleitner.view.AppTextView
                 android:id="@+id/btn_middle"
-                style="@style/TextView.large"
+                style="@style/TextView.medium.larger"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dialog_buttonHeight"
                 android:layout_weight="1"
                 android:background="@color/app_dialog_hover"
                 android:gravity="center"
-                android:text="Medium Text"
+                android:text="Middle"
                 android:visibility="gone"/>
 
             <View
@@ -128,13 +129,13 @@
 
             <ir.khaled.myleitner.view.AppTextView
                 android:id="@+id/btn_right"
-                style="@style/TextView.large"
+                style="@style/TextView.medium.larger"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/dialog_buttonHeight"
                 android:layout_weight="1"
                 android:background="@color/app_dialog_hover"
                 android:gravity="center"
-                android:text="Medium Text"
+                android:text="Right"
                 android:visibility="gone"/>
         </LinearLayout>
     </LinearLayout>

@@ -6,6 +6,8 @@
     <string name="error">عملیات با خطا مواجه شد</string>
     <string name="errorConnection">خطا در برقرای ارتباط با سرور, ارتباط خود با اینترنت را بررسی کنید.</string>
     <string name="ok">تایید</string>
+    <string name="cancel">انصراف</string>
+    <string name="loading">در حال انجام …</string>
 
     <!-- START HOME-->
     <string name="homeTitle">خانه</string>

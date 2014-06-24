@@ -13,19 +13,15 @@ import android.view.ViewGroup;
 import ir.khaled.myleitner.R;
 import ir.khaled.myleitner.activity.MainActivity;
 import ir.khaled.myleitner.model.Card;
-import ir.khaled.myleitner.model.WebResponse;
 import ir.khaled.myleitner.view.AppButton;
 import ir.khaled.myleitner.view.AppEditText;
 
 /**
  * Created by khaled on 6/20/2014.
  */
-public class AddCardFragment extends Fragment implements Card.SaveCardListener {
+public class AddCardFragment extends Fragment implements Card.AddCard.OnCardAddListener{
     private Context context;
-    private View v_root;
-    private AppEditText et_title;
-    private AppEditText et_front;
-    private AppEditText et_back;
+    private ViewHolder viewHolder;
 
     public static AddCardFragment newInstance() {
         AddCardFragment fragment = new AddCardFragment();
@@ -47,18 +43,20 @@ public class AddCardFragment extends Fragment implements Card.SaveCardListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        v_root = inflater.inflate(R.layout.fragment_add_card, container, false);
-        et_title = (AppEditText) v_root.findViewById(R.id.et_title);
-        et_front = (AppEditText) v_root.findViewById(R.id.et_front);
-        et_back = (AppEditText) v_root.findViewById(R.id.et_back);
-        AppButton btn_saveCard = (AppButton) v_root.findViewById(R.id.btn_saveCard);
+        viewHolder = new ViewHolder();
+        viewHolder.v_root = inflater.inflate(R.layout.fragment_add_card, container, false);
+
+        viewHolder.et_title = (AppEditText) viewHolder.v_root.findViewById(R.id.et_title);
+        viewHolder.et_front = (AppEditText) viewHolder.v_root.findViewById(R.id.et_front);
+        viewHolder.et_back = (AppEditText) viewHolder.v_root.findViewById(R.id.et_back);
+        AppButton btn_saveCard = (AppButton) viewHolder.v_root.findViewById(R.id.btn_saveCard);
         btn_saveCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 saveCard();
             }
         });
-        return v_root;
+        return viewHolder.v_root;
     }
 
     @Override
@@ -78,35 +76,28 @@ public class AddCardFragment extends Fragment implements Card.SaveCardListener {
 
     private void saveCard() {
         Card card = new Card(
-                et_title.getText().toString(),
-                et_front.getText().toString(),
-                et_back.getText().toString()
+                viewHolder.et_title.getText().toString(),
+                viewHolder.et_front.getText().toString(),
+                viewHolder.et_back.getText().toString()
         );
-        Card.saveCard(context, card, this);
+        Card.AddCard addCard = new Card.AddCard(context, viewHolder, this);
+        addCard.addCard();
     }
 
     @Override
-    public void saveCardInvalidName() {
-
+    public void onCardAdded() {
+        getFragmentManager().popBackStackImmediate();
     }
 
     @Override
-    public void saveCardInvalidFront() {
+    public void onCardAddCanceled() {
 
     }
 
-    @Override
-    public void saveCardInvalidBack() {
-
-    }
-
-    @Override
-    public void onResponseReceived(Boolean response) {
-
-    }
-
-    @Override
-    public void onResponseReceiveFailed(WebResponse<Boolean> response) {
-
+    public class ViewHolder {
+        public View v_root;
+        public AppEditText et_title;
+        public AppEditText et_front;
+        public AppEditText et_back;
     }
 }
