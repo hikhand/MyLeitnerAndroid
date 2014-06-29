@@ -20,7 +20,7 @@ import ir.khaled.myleitner.webservice.WebClient;
 /**
  * Created by kh.bakhtiari on 5/27/2014.
  */
-public class LastChanges extends AppDialog implements ResponseListener<LastChanges> {
+public class LastChanges extends AppDialog implements ResponseListener<LastChanges>, View.OnClickListener {
     private static final String S_LAST_VERSION_CODE = "lastVersionCode";
     private static final String PARAM_VERSION_CODE = "versionCode";
     @Expose
@@ -39,39 +39,6 @@ public class LastChanges extends AppDialog implements ResponseListener<LastChang
 
 
         new LastChanges(context).show();
-    }
-
-    @Override
-    public void show() {
-        getChanges();
-        setPositiveButton(context.getResources().getString(R.string.ok), new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-            }
-        });
-        setTitle(R.string.lastChangesTitle);
-        startLoading(context.getString(R.string.lastChangesLoadingMessage));
-        super.show();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        setNotUpdateVersion();//TODO uncomment this line
-    }
-
-    /**
-     * start a new thread to get lastChanges
-     */
-    private void getChanges() {
-        Request request = new Request(context, Request.REQUEST_CHANGES);
-        request.addParam(PARAM_VERSION_CODE, Device.getInstance(context).appVersionCode + "");
-
-        Type myType = new TypeToken<Response<LastChanges>>() {
-        }.getType();
-        WebClient<LastChanges> webClient = new WebClient<LastChanges>(context, request, WebClient.Connection.PERMANENT, myType, this);
-        webClient.start();
     }
 
     /**
@@ -93,6 +60,38 @@ public class LastChanges extends AppDialog implements ResponseListener<LastChang
         return false;
     }
 
+    @Override
+    public void show() {
+        init();
+        callWebService();
+        super.show();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        setNotUpdateVersion();//TODO uncomment this line
+    }
+
+    private void init() {
+        setPositiveButton(context.getResources().getString(R.string.ok), this);
+        setTitle(R.string.lastChangesTitle);
+        startLoading(context.getString(R.string.lastChangesLoadingMessage));
+    }
+
+    /**
+     * start a new thread to get lastChanges
+     */
+    private void callWebService() {
+        Request request = new Request(context, Request.REQUEST_CHANGES);
+        request.addParam(PARAM_VERSION_CODE, Device.getInstance(context).appVersionCode + "");
+
+        Type myType = new TypeToken<Response<LastChanges>>() {
+        }.getType();
+        WebClient<LastChanges> webClient = new WebClient<LastChanges>(context, request, WebClient.Connection.PERMANENT, myType, this);
+        webClient.start();
+    }
+
     private void setNotUpdateVersion() {
         SharedPreferences.Editor editor = StorageHelper.getSharedPreferencesEditor(context);
         editor.putInt(S_LAST_VERSION_CODE, Device.getInstance(context).appVersionCode);
@@ -108,6 +107,21 @@ public class LastChanges extends AppDialog implements ResponseListener<LastChang
 
     @Override
     public void onResponseError(Response<LastChanges> response) {
-        showError();
+        showError(null, context.getString(R.string.retry), new OnClickError());
+    }
+
+    @Override
+    public void onClick(View view) {
+        //on click OK
+        dismiss();
+    }
+
+    private class OnClickError implements View.OnClickListener {
+
+        @Override
+        public void onClick(View view) {
+            init();
+            callWebService();
+        }
     }
 }

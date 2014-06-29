@@ -20,7 +20,7 @@ import ir.khaled.myleitner.webservice.WebClient;
 /**
  * Created by kh.bakhtiari on 5/25/2014.
  */
-public class Welcome extends AppDialog implements ResponseListener<Welcome> {
+public class Welcome extends AppDialog implements ResponseListener<Welcome>, View.OnClickListener {
     private static final String S_IS_FIRST_RUN = "isFirstRun";
     private static final String PARAM_VERSION_CODE = "versionCode";
     @Expose
@@ -42,15 +42,8 @@ public class Welcome extends AppDialog implements ResponseListener<Welcome> {
 
     @Override
     public void show() {
-        getWelcome();
-        setTitle(R.string.welcomeTitle);
-        setPositiveButton(context.getResources().getString(R.string.ok), new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-            }
-        });
-        startLoading(context.getString(R.string.lastChangesLoadingMessage));
+        init();
+        callWebService();
         super.show();
     }
 
@@ -60,8 +53,13 @@ public class Welcome extends AppDialog implements ResponseListener<Welcome> {
         setIsNotFirstRun();//TODO uncomment this line
     }
 
+    private void init() {
+        setTitle(R.string.welcomeTitle);
+        setPositiveButton(context.getResources().getString(R.string.ok), this);
+        startLoading(context.getString(R.string.lastChangesLoadingMessage));
+    }
 
-    private void getWelcome() {
+    private void callWebService() {
         Request request = new Request(context, Request.REQUEST_WELCOME);
         request.addParam(PARAM_VERSION_CODE, Device.getInstance(context).appVersionCode + "");
 
@@ -95,6 +93,23 @@ public class Welcome extends AppDialog implements ResponseListener<Welcome> {
 
     @Override
     public void onResponseError(Response<Welcome> response) {
-        showError();
+        showError(null, context.getString(R.string.retry), new OnClickError());
+    }
+
+    @Override
+    public void onClick(View view) {
+        //on click ok
+        if (view.getId() == ID_BTN_POS) {
+            dismiss();
+        }
+    }
+
+    private class OnClickError implements View.OnClickListener {
+
+        @Override
+        public void onClick(View view) {
+            init();
+            callWebService();
+        }
     }
 }

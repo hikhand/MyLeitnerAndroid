@@ -7,10 +7,11 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import ir.khaled.myleitner.R;
 import ir.khaled.myleitner.dialog.AppDialog;
@@ -26,21 +27,34 @@ import ir.khaled.myleitner.webservice.WebClient;
 public class Card {
     private static final String PARAM_CARD = "card";
     private static Gson gson = new Gson();
-    //    public int id;
-//    public int userId;
-//    public int leitnerId;
-//    public int createTime;
-//    public int checkTime;
-//    public int likeCount;
-//    public int boxIndex;
-//    public int deckIndex;
-//    public int countCorrect;
-//    public int countIncorrect;
+    @SerializedName("id")
+    public int id;
+    @SerializedName("user")
+    public User user;
+    @SerializedName("leitnerId")
+    public int leitnerId;
+    @SerializedName("createTime")
+    public long createTime;
+    @SerializedName("checkTime")
+    public int checkTime;
+    @SerializedName("likeCount")
+    public int likeCount;
+    @SerializedName("boxIndex")
+    public int boxIndex;
+    @SerializedName("deckIndex")
+    public int deckIndex;
+    @SerializedName("countCorrect")
+    public int countCorrect;
+    @SerializedName("countIncorrect")
+    public int countIncorrect;
     @Expose
+    @SerializedName("title")
     public String title;
     @Expose
+    @SerializedName("front")
     public String front;
     @Expose
+    @SerializedName("back")
     public String back;
 //    public Tag[] tags;
 //    public Category category;
@@ -100,9 +114,9 @@ public class Card {
 
             Request request = new Request(context, Request.REQUEST_ADD_CARD) {
                 @Override
-                public ArrayList<Param> getExtraParams() {
-                    ArrayList<Request.Param> extraParams = new ArrayList<Param>();
-                    extraParams.add(new Param(PARAM_CARD, gson.toJson(card)));
+                public HashMap<String, String> getExtraParams() {
+                    HashMap<String, String> extraParams = new HashMap<String, String>();
+                    extraParams.put(PARAM_CARD, gson.toJson(card));
                     return extraParams;
                 }
             };

@@ -6,7 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import ir.khaled.myleitner.model.Device;
 
@@ -23,7 +23,7 @@ public class Request {
     @Expose
     public String requestName;
     @Expose
-    private ArrayList<Param> params;
+    private HashMap<String, String> params;
     private boolean paramChanged;
     private String jsonParams;
 
@@ -35,16 +35,16 @@ public class Request {
 
     public void addParam(String name, String value) {
         if (params == null)
-            params = new ArrayList<Param>();
+            params = new HashMap<String, String>();
 
-        params.add(new Param(name, value));
+        params.put(name, value);
         paramChanged = true;
     }
 
     /**
      * override this method to add params which need to be added from worker thread like making a json by gson
      */
-    public ArrayList<Param> getExtraParams() {
+    public HashMap<String, String> getExtraParams() {
         return null;
     }
 
@@ -56,9 +56,9 @@ public class Request {
         if (!paramChanged)
             return jsonParams;
 
-        ArrayList<Param> extraParams = getExtraParams();
+        HashMap<String, String> extraParams = getExtraParams();
         if (extraParams != null)
-            params.addAll(getExtraParams());
+            params.putAll(getExtraParams());
 
         jsonParams = getGson().toJson(this, Request.class);
         paramChanged = false;
@@ -71,17 +71,5 @@ public class Request {
         gsonBuilder.excludeFieldsWithoutExposeAnnotation();
         return gsonBuilder.create();
 
-    }
-
-    public class Param {
-        @Expose
-        public String name;
-        @Expose
-        public String value;
-
-        public Param(String name, String value) {
-            this.name = name;
-            this.value = value;
-        }
     }
 }

@@ -321,11 +321,10 @@ public class AppDialog extends Dialog {
         showContentView();
         if (buttonsSet)
             v_root.findViewById(R.id.ll_buttons).setVisibility(View.VISIBLE);
-
     }
 
     public void showError() {
-        showError(context.getString(R.string.errorConnection));
+        showError(null);
     }
 
     public void showError(String message) {
@@ -348,6 +347,10 @@ public class AppDialog extends Dialog {
 
         if (tv_loadingMessage == null)
             tv_loadingMessage = (AppTextView) v_root.findViewById(R.id.tv_loadingMessage);
+
+        if (message == null)
+            message = context.getString(R.string.errorConnection);
+
         tv_loadingMessage.setText(message);
         tv_loadingMessage.setVisibility(View.VISIBLE);
 

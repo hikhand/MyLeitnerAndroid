@@ -1,5 +1,6 @@
 package ir.khaled.myleitner.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -18,6 +19,7 @@ import ir.khaled.myleitner.activity.MainActivity;
  */
 public class MainFragment extends Fragment implements FragmentManager.OnBackStackChangedListener {
     private ListView lv_main;
+    private Context context;
 
     /**
      * Returns a new instance of this fragment.
@@ -33,6 +35,7 @@ public class MainFragment extends Fragment implements FragmentManager.OnBackStac
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = getActivity();
         setHasOptionsMenu(true);
         getFragmentManager().addOnBackStackChangedListener(this);
     }
@@ -65,7 +68,7 @@ public class MainFragment extends Fragment implements FragmentManager.OnBackStac
         if (fragmentManager == null)
             return;
 
-        if (fragmentManager.getBackStackEntryCount() == 0){
+        if (fragmentManager.getBackStackEntryCount() == 0) {
             //if nothing is in the fragment backstack meaning main fragment is on screen
             fragmentAttached();
         }
