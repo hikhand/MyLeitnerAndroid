@@ -5,9 +5,6 @@ import android.content.SharedPreferences;
 import android.view.View;
 
 import com.google.gson.annotations.Expose;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
 
 import ir.khaled.myleitner.R;
 import ir.khaled.myleitner.helper.StorageHelper;
@@ -86,9 +83,7 @@ public class LastChanges extends AppDialog implements ResponseListener<LastChang
         Request request = new Request(context, Request.REQUEST_CHANGES);
         request.addParam(PARAM_VERSION_CODE, Device.getInstance(context).appVersionCode + "");
 
-        Type myType = new TypeToken<Response<LastChanges>>() {
-        }.getType();
-        WebClient<LastChanges> webClient = new WebClient<LastChanges>(context, request, WebClient.Connection.PERMANENT, myType, this);
+        WebClient<LastChanges> webClient = new WebClient<LastChanges>(context, request, WebClient.Connection.PERMANENT, WebClient.Type.lastChanges, this);
         webClient.start();
     }
 

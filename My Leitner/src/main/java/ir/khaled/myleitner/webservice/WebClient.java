@@ -10,7 +10,6 @@ import com.google.gson.GsonBuilder;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.lang.reflect.Type;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
@@ -134,7 +133,7 @@ public class WebClient<T> extends Thread {
             }
             result += part;
         }
-        return getGson().fromJson(result, typeResult);
+        return getGson().fromJson(result, Types.getType(typeResult));
     }
 
     private Gson getGson() {
@@ -207,5 +206,12 @@ public class WebClient<T> extends Thread {
     public static enum Connection {
         PERMANENT,
         IMMEDIATELY
+    }
+
+    public static enum Type {
+        bool,
+        welcome,
+        lastChanges,
+
     }
 }

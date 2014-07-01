@@ -8,9 +8,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
 
 import ir.khaled.myleitner.R;
@@ -121,9 +119,7 @@ public class Card {
                 }
             };
 
-            Type myType = new TypeToken<Response<Boolean>>() {
-            }.getType();
-            WebClient<Boolean> webClient = new WebClient<Boolean>(context, request, WebClient.Connection.PERMANENT, myType, this);
+            WebClient<Boolean> webClient = new WebClient<Boolean>(context, request, WebClient.Connection.PERMANENT, WebClient.Type.bool, this);
             webClient.start();
             return true;
         }

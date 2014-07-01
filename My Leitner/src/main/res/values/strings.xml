@@ -15,10 +15,11 @@
 
     <!-- welcome -->
     <string name="welcomeTitle">Welcome to My Leitner</string>
+    <string name="welcomeLoadingMessage">Loading data …</string>
 
     <!-- last changes -->
     <string name="lastChangesTitle">Last changes</string>
-    <string name="lastChangesLoadingMessage">Fetching this version\'s changes…</string>
+    <string name="lastChangesLoadingMessage">Fetching this version\'s changes …</string>
     <!-- END HOME-->
 
 

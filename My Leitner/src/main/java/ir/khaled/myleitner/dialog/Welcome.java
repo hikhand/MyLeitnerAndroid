@@ -5,9 +5,6 @@ import android.content.SharedPreferences;
 import android.view.View;
 
 import com.google.gson.annotations.Expose;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
 
 import ir.khaled.myleitner.R;
 import ir.khaled.myleitner.helper.StorageHelper;
@@ -56,16 +53,14 @@ public class Welcome extends AppDialog implements ResponseListener<Welcome>, Vie
     private void init() {
         setTitle(R.string.welcomeTitle);
         setPositiveButton(context.getResources().getString(R.string.ok), this);
-        startLoading(context.getString(R.string.lastChangesLoadingMessage));
+        startLoading(context.getString(R.string.welcomeLoadingMessage));
     }
 
     private void callWebService() {
         Request request = new Request(context, Request.REQUEST_WELCOME);
         request.addParam(PARAM_VERSION_CODE, Device.getInstance(context).appVersionCode + "");
 
-        Type myType = new TypeToken<Response<Welcome>>() {
-        }.getType();
-        WebClient<Welcome> webClient = new WebClient<Welcome>(context, request, WebClient.Connection.PERMANENT, myType, this);
+        WebClient<Welcome> webClient = new WebClient<Welcome>(context, request, WebClient.Connection.PERMANENT, WebClient.Type.welcome, this);
         webClient.start();
     }
 
