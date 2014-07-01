@@ -2,28 +2,66 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ll_loading"
+    android:id="@+id/v_loading"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:padding="@dimen/medium"
-    android:background="#ffd4d361">
+    android:background="@drawable/card_background">
 
-    <TextView
-        android:id="@+id/tv_errorText"
-        style="@style/EditText.medium"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="@string/error"
-        android:layout_marginRight="@dimen/small"
-        android:layout_gravity="center_vertical"/>
-
-    <Button
-        android:id="@+id/bt_retry"
+    <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/retry"
-        android:layout_gravity="center_vertical"/>
+        android:id="@+id/pb_loading"
+        android:layout_gravity="center_horizontal"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/v_errorHorizontal"
+        android:visibility="gone">
+
+        <ir.khaled.myleitner.view.AppTextView
+            android:id="@+id/tv_errorTextHorizontal"
+            style="@style/EditText.medium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/error"
+            android:layout_marginRight="@dimen/small"
+            android:layout_gravity="center_vertical"/>
+
+        <ir.khaled.myleitner.view.AppButton
+            android:id="@+id/btn_retryHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/retry"
+            android:layout_gravity="center_vertical"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/v_errorVertical"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <ir.khaled.myleitner.view.AppTextView
+            style="@style/EditText.medium"
+            android:id="@+id/tv_errorVertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/error"
+            android:layout_margin="@dimen/small"/>
+
+        <ir.khaled.myleitner.view.AppButton
+            android:id="@+id/btn_retryVertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/retry"
+            />
+    </LinearLayout>
 
 </LinearLayout>

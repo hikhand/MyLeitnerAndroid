@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import ir.khaled.myleitner.R;
 import ir.khaled.myleitner.activity.MainActivity;
+import ir.khaled.myleitner.interfaces.Loading;
 
 /**
  * Created by khaled on 6/18/2014.
@@ -71,6 +72,33 @@ public class MainFragment extends Fragment implements FragmentManager.OnBackStac
         if (fragmentManager.getBackStackEntryCount() == 0) {
             //if nothing is in the fragment backstack meaning main fragment is on screen
             fragmentAttached();
+        }
+    }
+
+    public static class LoadingFront implements Loading {
+
+        public LoadingFront(Context context, View v_parent) {
+
+        }
+
+        @Override
+        public void startLoading() {
+
+        }
+
+        @Override
+        public void stopLoading() {
+
+        }
+
+        @Override
+        public void showError(String errorMessage, String textButton, View.OnClickListener onClickListener) {
+
+        }
+
+        @Override
+        public void showError(String errorMessage, String textButtonPos, View.OnClickListener onClickListenerPos, String textButtonNeg, View.OnClickListener onClickListenerNeg) {
+
         }
     }
 }

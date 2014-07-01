@@ -6,7 +6,7 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 
 import ir.khaled.myleitner.R;
-import ir.khaled.myleitner.helper.Util;
+import ir.khaled.myleitner.library.Util;
 
 /**
  * Created by kh.bakhtiari on 11/30/13.

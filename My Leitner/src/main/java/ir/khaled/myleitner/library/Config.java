@@ -1,4 +1,4 @@
-package ir.khaled.myleitner.helper;
+package ir.khaled.myleitner.library;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

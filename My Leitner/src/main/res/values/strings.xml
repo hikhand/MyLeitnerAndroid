@@ -3,8 +3,8 @@
 
     <string name="app_name">My Leitner</string>
     <string name="retry">Retry</string>
-    <string name="error">Operation has encountered a problem</string>
-    <string name="errorConnection">can\'t connect to server. check your connection.</string>
+    <string name="error">Operation failed</string>
+    <string name="errorConnection">Error connecting to server</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="loading">In progress …</string>

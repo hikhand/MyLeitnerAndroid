@@ -2,6 +2,8 @@ package ir.khaled.myleitner.helper;
 
 import android.util.Log;
 
+import ir.khaled.myleitner.library.Config;
+
 /**
  * Created by kh.bakhtiari on 5/19/2014.
  */
