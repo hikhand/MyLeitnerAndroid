@@ -5,14 +5,29 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <ProgressBar
-        android:id="@+id/pb_loading"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="@dimen/medium"
-        android:layout_marginRight="@dimen/medium"
-        android:layout_marginBottom="@dimen/medium"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/medium"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal">
+
+        <ProgressBar
+            android:id="@+id/pb_loading"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/medium"
+            android:layout_marginRight="@dimen/medium"/>
+
+        <TextView
+            style="@style/TextView.medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/loading"
+            android:id="@+id/tv_loading"/>
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/rl_error"

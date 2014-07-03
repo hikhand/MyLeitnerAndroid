@@ -53,7 +53,7 @@ public class MainFragment extends Fragment implements FragmentManager.OnBackStac
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        lv_main = (ListView) inflater.inflate(R.layout.fragment_main, container, false);
+        lv_main = (ListView) inflater.inflate(R.layout.main_fragment, container, false);
         return lv_main;
     }
 
@@ -95,10 +95,10 @@ public class MainFragment extends Fragment implements FragmentManager.OnBackStac
         public void showError(String errorMessage, String textButton, View.OnClickListener onClickListener) {
 
         }
-
-        @Override
-        public void showError(String errorMessage, String textButtonPos, View.OnClickListener onClickListenerPos, String textButtonNeg, View.OnClickListener onClickListenerNeg) {
-
-        }
+//
+//        @Override
+//        public void showError(String errorMessage, String textButtonPos, View.OnClickListener onClickListenerPos, String textButtonNeg, View.OnClickListener onClickListenerNeg) {
+//
+//        }
     }
 }

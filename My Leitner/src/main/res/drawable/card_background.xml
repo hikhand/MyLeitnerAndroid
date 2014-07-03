@@ -19,9 +19,7 @@
     <item>
         <shape>
             <padding
-                android:bottom="1.5dp"
-                android:left="1dp"
-                android:right="1dp"/>
+                android:bottom="1.5dp"/>
             <solid android:color="#d2d2d2"/>
             <corners android:radius="3dp"/>
         </shape>
