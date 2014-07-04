@@ -24,10 +24,9 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.regex.Pattern;
 
+import ir.khaled.myleitner.library.Util;
 import ir.khaled.myleitner.webservice.Request;
 
 /**
@@ -68,28 +67,9 @@ public class Device {
 
     public static String getUDK(Context context) {
         if (UDK == null || UDK.length() == 0)
-            UDK = md5(Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID));
+            UDK = Util.md5(Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID));
 
         return UDK;
-    }
-
-    private static String md5(String s) {
-        try {
-            // Create MD5 Hash
-            MessageDigest digest = MessageDigest.getInstance("MD5");
-            digest.update(s.getBytes());
-            byte messageDigest[] = digest.digest();
-
-            // Create Hex String
-            StringBuffer hexString = new StringBuffer();
-            for (int i = 0; i < messageDigest.length; i++)
-                hexString.append(Integer.toString((messageDigest[i] & 0xff) + 0x100, 16).substring(1));
-            return hexString.toString();
-
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return "";
     }
 
     private static String createJson(Context context) {
