@@ -42,7 +42,7 @@ public class User {
     }
 
     public boolean isLogin() {
-        return false;
+        return id > 0;
     }
 
     public interface OnLoginFinishedListener {
