@@ -25,7 +25,7 @@ public class MainFragment extends Fragment implements FragmentManager.OnBackStac
     /**
      * Returns a new instance of this fragment.
      */
-    public static MainFragment newInstance() {
+    public static Fragment newInstance() {
         MainFragment fragment = new MainFragment();
 //        Bundle args = new Bundle();
 //        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
@@ -48,7 +48,7 @@ public class MainFragment extends Fragment implements FragmentManager.OnBackStac
     }
 
     private void fragmentAttached() {
-        ((MainActivity) getActivity()).onFragmentAttached(MainActivity.FRAGMENT_MAIN, getString(R.string.app_name));
+        ((MainActivity) getActivity()).onFragmentAttached(MainActivity.Fragment.FRAGMENT_MAIN, getString(R.string.app_name));
     }
 
     @Override

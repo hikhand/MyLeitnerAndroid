@@ -6,6 +6,7 @@ import java.lang.reflect.Type;
 
 import ir.khaled.myleitner.dialog.LastChanges;
 import ir.khaled.myleitner.dialog.Welcome;
+import ir.khaled.myleitner.model.User;
 
 /**
  * Created by khaled on 6/30/2014.
@@ -22,6 +23,9 @@ public class Types {
 
             case lastChanges:
                 return typeLastChanges();
+
+            case user:
+                return typeUser();
 
             default:
                 return typeBoolean();
@@ -40,6 +44,11 @@ public class Types {
 
     public static Type typeBoolean() {
         return new TypeToken<Response<Boolean>>() {
+        }.getType();
+    }
+
+    public static Type typeUser() {
+        return new TypeToken<Response<User>>() {
         }.getType();
     }
 }

@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.view.View;
 
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 import ir.khaled.myleitner.R;
 import ir.khaled.myleitner.helper.StorageHelper;
@@ -20,6 +21,7 @@ import ir.khaled.myleitner.webservice.WebClient;
 public class LastChanges extends AppDialog implements ResponseListener<LastChanges>, View.OnClickListener {
     private static final String S_LAST_VERSION_CODE = "lastVersionCode";
     private static final String PARAM_VERSION_CODE = "versionCode";
+    @SerializedName("lastChanges")
     @Expose
     private String lastChanges;
 
@@ -83,7 +85,7 @@ public class LastChanges extends AppDialog implements ResponseListener<LastChang
         Request request = new Request(context, Request.REQUEST_CHANGES);
         request.addParam(PARAM_VERSION_CODE, Device.getInstance(context).appVersionCode + "");
 
-        WebClient<LastChanges> webClient = new WebClient<LastChanges>(context, request, WebClient.Connection.PERMANENT, WebClient.Type.lastChanges, this);
+        WebClient<LastChanges> webClient = new WebClient<LastChanges>(request, WebClient.Connection.PERMANENT, WebClient.Type.lastChanges, this);
         webClient.start();
     }
 

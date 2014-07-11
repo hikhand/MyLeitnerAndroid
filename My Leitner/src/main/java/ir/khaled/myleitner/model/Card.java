@@ -84,19 +84,21 @@ public class Card {
         }
 
         public void addCard() {
-            if (saveCard(context, card)) {
+            if (isCardValid()) {
                 startLoading(context.getString(R.string.addCardLoading));
                 show();
+                saveCard();
             }
         }
 
         /**
+         * checks whether the card is valid to be saved or not.
+         * <br/>
+         * if card is not valid show the error on their EditTexts
          *
-         * @param context
-         * @param card
-         * @return true if starts webservice, false otherwise
+         * @return true if card is valid false otherwise
          */
-        private boolean saveCard(Context context, final Card card) {
+        private boolean isCardValid() {
             if (TextUtils.isEmpty(card.title)) {
                 saveCardInvalidTitle();
                 return false;
@@ -109,6 +111,13 @@ public class Card {
                 saveCardInvalidBack();
                 return false;
             }
+            return true;
+        }
+
+        /**
+         * saves card to server
+         */
+        private void saveCard() {
 
             Request request = new Request(context, Request.REQUEST_ADD_CARD) {
                 @Override
@@ -119,9 +128,8 @@ public class Card {
                 }
             };
 
-            WebClient<Boolean> webClient = new WebClient<Boolean>(context, request, WebClient.Connection.PERMANENT, WebClient.Type.bool, this);
+            WebClient<Boolean> webClient = new WebClient<Boolean>(request, WebClient.Connection.PERMANENT, WebClient.Type.bool, this);
             webClient.start();
-            return true;
         }
 
         public void saveCardInvalidTitle() {

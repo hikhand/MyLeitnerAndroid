@@ -19,6 +19,8 @@ public class Request {
     public static final String REQUEST_CHANGES = "lastChanges";
     public static final String REQUEST_REGISTER_DEVICE = "registerDevice";
     public static final String REQUEST_ADD_CARD = "addCard";
+    public static final String REQUEST_LOGIN = "login";
+    public static final String REQUEST_REGISTER = "register";
     private static final String PARAM_UDK = "udk";
     @Expose
     public String requestName;
@@ -26,10 +28,12 @@ public class Request {
     private HashMap<String, String> params;
     private boolean paramChanged;
     private String jsonParams;
+    private Context context;
 
     public Request(Context context, String requestName) {
         this.requestName = requestName;
         this.paramChanged = true;
+        this.context = context;
         addParam(PARAM_UDK, Device.getUDK(context));
     }
 
@@ -71,5 +75,9 @@ public class Request {
         gsonBuilder.excludeFieldsWithoutExposeAnnotation();
         return gsonBuilder.create();
 
+    }
+
+    public Context getContext() {
+        return context;
     }
 }

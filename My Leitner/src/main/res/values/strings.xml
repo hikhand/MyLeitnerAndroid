@@ -8,6 +8,8 @@
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="loading">In progress …</string>
+    <string name="error_invalidEmail">The entered email address is not valid</string>
+    <string name="error_shortPassword">Password must contain more than 6 characters.</string>
 
     <!-- START HOME-->
     <string name="homeTitle">Home</string>
@@ -57,6 +59,31 @@
     <!--START USER -->
     <string name="user_title">User Panel</string>
     <!--END USER -->
+
+
+
+
+    <!--START LOGIN -->
+    <string name="login_title">Login</string>
+    <string name="error_wrongInfo">The entered email or password is wrong.</string>
+    <string name="error_noUserWithEmail">No user with given email address exists</string>
+    <string name="error_loginFailed">Login failed, please try again</string>
+    <string name="loginSucceed">You logged in</string>
+    <!--END LOGIN -->
+
+
+
+
+    <!--START REGISTER -->
+    <string name="register_title">Register</string>
+    <string name="error_shortDisplayName">Name must contain at least 3 characters</string>
+    <string name="error_largeDisplayName">Name is too large it shouldn\'t contain more than 20 characters</string>
+    <string name="error_passwordMismatch">Entered passwords don\'t match</string>
+    <string name="error_emailAlreadyExists">An account with this email already exists</string>
+    <string name="error_registerFailed">Register failed, please try again</string>
+    <string name="registerSucceed">Your account has been successfully created</string>
+    <!--END REGISTER -->
+
 
     <!-- START LEITNER -->
     <string name="leitnerTitle"></string>

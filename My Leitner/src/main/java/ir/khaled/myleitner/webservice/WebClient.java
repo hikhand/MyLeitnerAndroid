@@ -43,12 +43,12 @@ public class WebClient<T> extends Thread {
      * @param typeResult       Type myType = new TypeToken<WebResponse<yourClass>>() {}.getType();
      * @param receiveListener
      */
-    public WebClient(Context context, Request request, Connection connectionType, Type typeResult, ResponseListener<T> receiveListener) {
+    public WebClient(Request request, Connection connectionType, Type typeResult, ResponseListener<T> receiveListener) {
         this.request = request;
         this.receiveListener = receiveListener;
         this.connectionType = connectionType;
         this.typeResult = typeResult;
-        this.context = context;
+        this.context = request.getContext();
         if (requestPing == null)
             requestPing = new Request(context, Request.REQUEST_PING);
     }
@@ -212,6 +212,6 @@ public class WebClient<T> extends Thread {
         bool,
         welcome,
         lastChanges,
-
+        user
     }
 }

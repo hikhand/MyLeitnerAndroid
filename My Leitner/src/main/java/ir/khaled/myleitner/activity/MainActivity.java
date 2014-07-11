@@ -13,18 +13,15 @@ import ir.khaled.myleitner.dialog.DialogPublisher;
 import ir.khaled.myleitner.dialog.LastChanges;
 import ir.khaled.myleitner.dialog.Welcome;
 import ir.khaled.myleitner.fragment.AddCardFragment;
+import ir.khaled.myleitner.fragment.LoginFragment;
 import ir.khaled.myleitner.fragment.MainFragment;
 import ir.khaled.myleitner.fragment.NavigationDrawerFragment;
-import ir.khaled.myleitner.fragment.UserFragment;
 import ir.khaled.myleitner.model.User;
 
 
 public class MainActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
-    public static final int FRAGMENT_MAIN = 1;
-    public static final int FRAGMENT_ADD_CARD = 2;
-    public static final int FRAGMENT_USER = 3;
     private Context context;
-    private int currentFragment;
+    private Fragment currentFragment;
     AddCardFragment addCardFragment;
     MainFragment mainFragment;
     /**
@@ -62,7 +59,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 
         switch (position) {
             case 0:
-                fragmentManager.beginTransaction().add(R.id.container, UserFragment.newInstance()).addToBackStack(null).commit();
+                fragmentManager.beginTransaction().add(R.id.container, LoginFragment.newInstance()).addToBackStack(LoginFragment.POP_TAG).commit();
                 if (User.getUser(context).isLogin()) {
                     //user profile
                 } else {
@@ -82,7 +79,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                 .commit();
     }
 
-    public void onFragmentAttached(int fragment, String title) {
+    public void onFragmentAttached(Fragment fragment, String title) {
         currentFragment = fragment;
         mTitle = title;
         restoreActionBar();
@@ -151,5 +148,13 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
     protected void onDestroy() {
         DialogPublisher.getInstance().nothingIsShown();
         super.onDestroy();
+    }
+
+    public static enum Fragment {
+        FRAGMENT_MAIN,
+        FRAGMENT_ADD_CARD,
+        FRAGMENT_USER,
+        FRAGMENT_LOGIN,
+        FRAGMENT_REGISTER
     }
 }

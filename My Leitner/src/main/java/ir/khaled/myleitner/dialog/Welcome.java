@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.view.View;
 
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 import ir.khaled.myleitner.R;
 import ir.khaled.myleitner.helper.StorageHelper;
@@ -20,6 +21,8 @@ import ir.khaled.myleitner.webservice.WebClient;
 public class Welcome extends AppDialog implements ResponseListener<Welcome>, View.OnClickListener {
     private static final String S_IS_FIRST_RUN = "isFirstRun";
     private static final String PARAM_VERSION_CODE = "versionCode";
+
+    @SerializedName("message")
     @Expose
     private String message;
 
@@ -35,6 +38,16 @@ public class Welcome extends AppDialog implements ResponseListener<Welcome>, Vie
 //            return;//TODO uncomment this two lines
 
         new Welcome(context).show();
+    }
+
+    /**
+     * checks whether its apps first run or not <br/>
+     *
+     * @param context used to get shared preferences
+     * @return true if is apps first run, false otherwise
+     */
+    private static boolean isAppFirstRun(Context context) {
+        return StorageHelper.getSharedPreferences(context).getBoolean(S_IS_FIRST_RUN, true);
     }
 
     @Override
@@ -60,18 +73,8 @@ public class Welcome extends AppDialog implements ResponseListener<Welcome>, Vie
         Request request = new Request(context, Request.REQUEST_WELCOME);
         request.addParam(PARAM_VERSION_CODE, Device.getInstance(context).appVersionCode + "");
 
-        WebClient<Welcome> webClient = new WebClient<Welcome>(context, request, WebClient.Connection.PERMANENT, WebClient.Type.welcome, this);
+        WebClient<Welcome> webClient = new WebClient<Welcome>(request, WebClient.Connection.PERMANENT, WebClient.Type.welcome, this);
         webClient.start();
-    }
-
-    /**
-     * checks whether its apps first run or not <br/>
-     *
-     * @param context used to get shared preferences
-     * @return true if is apps first run, false otherwise
-     */
-    private static boolean isAppFirstRun(Context context) {
-        return StorageHelper.getSharedPreferences(context).getBoolean(S_IS_FIRST_RUN, true);
     }
 
     private void setIsNotFirstRun() {

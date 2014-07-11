@@ -38,7 +38,7 @@ public class AddCardFragment extends Fragment implements Card.AddCard.OnCardAddL
     @Override
     public void onResume() {
         super.onResume();
-        ((MainActivity) getActivity()).onFragmentAttached(MainActivity.FRAGMENT_ADD_CARD, getString(R.string.addCard_title));
+        ((MainActivity) getActivity()).onFragmentAttached(MainActivity.Fragment.FRAGMENT_ADD_CARD, getString(R.string.addCard_title));
     }
 
     @Override
