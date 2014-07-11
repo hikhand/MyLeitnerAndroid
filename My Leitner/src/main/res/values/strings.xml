@@ -52,6 +52,12 @@
     <!-- END ADD_CARD -->
 
 
+
+
+    <!--START USER -->
+    <string name="user_title">User Panel</string>
+    <!--END USER -->
+
     <!-- START LEITNER -->
     <string name="leitnerTitle"></string>
     <!-- END LEITNER -->

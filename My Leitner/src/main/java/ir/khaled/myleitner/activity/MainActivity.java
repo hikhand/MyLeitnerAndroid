@@ -1,5 +1,6 @@
 package ir.khaled.myleitner.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -14,11 +15,15 @@ import ir.khaled.myleitner.dialog.Welcome;
 import ir.khaled.myleitner.fragment.AddCardFragment;
 import ir.khaled.myleitner.fragment.MainFragment;
 import ir.khaled.myleitner.fragment.NavigationDrawerFragment;
+import ir.khaled.myleitner.fragment.UserFragment;
+import ir.khaled.myleitner.model.User;
 
 
 public class MainActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
     public static final int FRAGMENT_MAIN = 1;
     public static final int FRAGMENT_ADD_CARD = 2;
+    public static final int FRAGMENT_USER = 3;
+    private Context context;
     private int currentFragment;
     AddCardFragment addCardFragment;
     MainFragment mainFragment;
@@ -36,6 +41,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        context = this;
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -51,9 +57,19 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
         switch (position) {
-            case 1:
-                break;
+            case 0:
+                fragmentManager.beginTransaction().add(R.id.container, UserFragment.newInstance()).addToBackStack(null).commit();
+                if (User.getUser(context).isLogin()) {
+                    //user profile
+                } else {
+                    //user: login, register, forget pass ,...
+//                    fragmentManager.beginTransaction().add(R.id.container, UserFragment.newInstance()).addToBackStack(null).commit();
+                }
+                return;
 
             case 2:
                 break;
@@ -61,7 +77,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 
 
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, MainFragment.newInstance())
                 .commit();
