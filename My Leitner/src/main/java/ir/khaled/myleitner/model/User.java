@@ -137,11 +137,11 @@ public class User {
          * call server to login
          */
         private void loginImpl() {
-            Request request = new Request(context, Request.REQUEST_LOGIN);
+            Request request = new Request(context, Request.Method.LOGIN);
             request.addParam(PARAM_EMAIL, getEmail());
             request.addParam(PARAM_PASSWORD, getPassword());
 
-            WebClient<User> webClient = new WebClient<User>(request, WebClient.Connection.PERMANENT, WebClient.Type.user, this);
+            WebClient<User> webClient = new WebClient<User>(request, WebClient.Connection.PERMANENT, this);
             webClient.start();
         }
 
@@ -276,12 +276,12 @@ public class User {
         }
 
         private void registerImp() {
-            Request request = new Request(context, Request.REQUEST_REGISTER);
+            Request request = new Request(context, Request.Method.REGISTER);
             request.addParam(PARAM_EMAIL, getEmail());
             request.addParam(PARAM_DISPLAY_NAME, getDisplayName());
             request.addParam(PARAM_PASSWORD, getPassword());
 
-            WebClient<User> webClient = new WebClient<User>(request, WebClient.Connection.PERMANENT, WebClient.Type.user, this);
+            WebClient<User> webClient = new WebClient<User>(request, WebClient.Connection.PERMANENT, this);
             webClient.start();
         }
 

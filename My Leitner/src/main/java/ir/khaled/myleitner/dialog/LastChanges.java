@@ -82,10 +82,10 @@ public class LastChanges extends AppDialog implements ResponseListener<LastChang
      * start a new thread to get lastChanges
      */
     private void callWebService() {
-        Request request = new Request(context, Request.REQUEST_CHANGES);
+        Request request = new Request(context, Request.Method.REGISTER_DEVICE);
         request.addParam(PARAM_VERSION_CODE, Device.getInstance(context).appVersionCode + "");
 
-        WebClient<LastChanges> webClient = new WebClient<LastChanges>(request, WebClient.Connection.PERMANENT, WebClient.Type.lastChanges, this);
+        WebClient<LastChanges> webClient = new WebClient<LastChanges>(request, WebClient.Connection.PERMANENT, this);
         webClient.start();
     }
 

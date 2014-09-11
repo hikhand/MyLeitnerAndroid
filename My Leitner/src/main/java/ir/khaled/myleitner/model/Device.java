@@ -86,7 +86,7 @@ public class Device {
     }
 
     public static Request getRequestRegisterDevice(Context context) {
-        Request request = new Request(context, Request.REQUEST_REGISTER_DEVICE);
+        Request request = new Request(context, Request.Method.REGISTER_DEVICE);
         request.addParam(PARAM_DEVICE_INFO, createJson(context));
         return request;
     }

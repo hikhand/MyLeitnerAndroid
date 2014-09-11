@@ -14,7 +14,7 @@ import ir.khaled.myleitner.dialog.LastChanges;
 import ir.khaled.myleitner.dialog.Welcome;
 import ir.khaled.myleitner.fragment.AddCardFragment;
 import ir.khaled.myleitner.fragment.LoginFragment;
-import ir.khaled.myleitner.fragment.MainFragment;
+import ir.khaled.myleitner.fragment.FrontFragment;
 import ir.khaled.myleitner.fragment.NavigationDrawerFragment;
 import ir.khaled.myleitner.model.User;
 
@@ -23,7 +23,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
     private Context context;
     private Fragment currentFragment;
     AddCardFragment addCardFragment;
-    MainFragment mainFragment;
+    FrontFragment frontFragment;
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -75,7 +75,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 
 
         fragmentManager.beginTransaction()
-                .replace(R.id.container, MainFragment.newInstance())
+                .replace(R.id.container, FrontFragment.newInstance())
                 .commit();
     }
 

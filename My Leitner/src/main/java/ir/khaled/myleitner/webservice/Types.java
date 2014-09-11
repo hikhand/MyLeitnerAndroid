@@ -12,43 +12,30 @@ import ir.khaled.myleitner.model.User;
  * Created by khaled on 6/30/2014.
  */
 public class Types {
+    private static Type bolean;
+    private static Type user;
 
-    public static Type getType(WebClient.Type type) {
-        switch (type) {
-            case bool:
-                return typeBoolean();
-
-            case welcome:
-                return typeWelcome();
-
-            case lastChanges:
-                return typeLastChanges();
-
-            case user:
-                return typeUser();
-
-            default:
-                return typeBoolean();
-        }
-    }
-
-    public static Type typeWelcome() {
+    public static Type welcome() {
         return new TypeToken<Response<Welcome>>() {
         }.getType();
     }
 
-    public static Type typeLastChanges() {
+    public static Type lastChanges() {
         return new TypeToken<Response<LastChanges>>() {
         }.getType();
     }
 
-    public static Type typeBoolean() {
-        return new TypeToken<Response<Boolean>>() {
-        }.getType();
+    public static Type booleanT() {
+        if (bolean == null)
+            bolean = new TypeToken<Response<Boolean>>() {
+            }.getType();
+        return bolean;
     }
 
-    public static Type typeUser() {
-        return new TypeToken<Response<User>>() {
-        }.getType();
+    public static Type user() {
+        if (user == null)
+            user = new TypeToken<Response<User>>() {
+            }.getType();
+        return user;
     }
 }

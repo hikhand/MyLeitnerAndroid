@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
 
+import java.lang.reflect.Type;
 import java.util.HashMap;
 
 import ir.khaled.myleitner.model.Device;
@@ -14,24 +15,19 @@ import ir.khaled.myleitner.model.Device;
  * Created by kh.bakhtiari on 5/27/2014.
  */
 public class Request {
-    public static final String REQUEST_PING = "ping";
-    public static final String REQUEST_WELCOME = "welcome";
-    public static final String REQUEST_CHANGES = "lastChanges";
-    public static final String REQUEST_REGISTER_DEVICE = "registerDevice";
-    public static final String REQUEST_ADD_CARD = "addCard";
-    public static final String REQUEST_LOGIN = "login";
-    public static final String REQUEST_REGISTER = "register";
     private static final String PARAM_UDK = "udk";
     @Expose
     public String requestName;
     @Expose
     private HashMap<String, String> params;
+    public Type type;
     private boolean paramChanged;
     private String jsonParams;
     private Context context;
 
-    public Request(Context context, String requestName) {
-        this.requestName = requestName;
+    public Request(Context context, Method method) {
+        this.type = method.type;
+        this.requestName = method.request;
         this.paramChanged = true;
         this.context = context;
         addParam(PARAM_UDK, Device.getUDK(context));
@@ -80,4 +76,23 @@ public class Request {
     public Context getContext() {
         return context;
     }
+
+    public static enum Method {
+        PING("ping", Types.booleanT()),
+        WELCOME("welcome", Types.welcome()),
+        CHANGES("lastChanges", Types.lastChanges()),
+        REGISTER_DEVICE("registerDevice", Types.booleanT()),
+        ADD_CARD("addCard", Types.booleanT()),
+        LOGIN("login", Types.user()),
+        REGISTER("register", Types.user());
+
+        String request;
+        Type type;
+
+        Method(String request, Type type) {
+            this.request = request;
+            this.type = type;
+        }
+    }
+
 }

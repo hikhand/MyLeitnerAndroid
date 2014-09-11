@@ -10,9 +10,9 @@ import ir.khaled.myleitner.model.Card;
 /**
  * Created by khaled on 6/30/2014.
  */
-public class MainAdapter extends AppBaseAdapter<Card> {
+public class FrontAdapter extends AppBaseAdapter<Card> {
 
-    public MainAdapter(Context context, AbsListView listView) {
+    public FrontAdapter(Context context, AbsListView listView) {
         super(context, listView);
     }
 

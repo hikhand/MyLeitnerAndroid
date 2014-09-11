@@ -33,24 +33,21 @@ public class WebClient<T> extends Thread {
     private Request request;
     private ResponseListener<T> receiveListener;
     private Connection connectionType;
-    private Type typeResult;
     private Context context;
     private Handler handlerUI = new Handler();
 
     /**
      * @param request
      * @param connectionType
-     * @param typeResult       Type myType = new TypeToken<WebResponse<yourClass>>() {}.getType();
      * @param receiveListener
      */
-    public WebClient(Request request, Connection connectionType, Type typeResult, ResponseListener<T> receiveListener) {
+    public WebClient(Request request, Connection connectionType, ResponseListener<T> receiveListener) {
         this.request = request;
         this.receiveListener = receiveListener;
         this.connectionType = connectionType;
-        this.typeResult = typeResult;
         this.context = request.getContext();
         if (requestPing == null)
-            requestPing = new Request(context, Request.REQUEST_PING);
+            requestPing = new Request(context, Request.Method.PING);
     }
 
 
@@ -133,7 +130,7 @@ public class WebClient<T> extends Thread {
             }
             result += part;
         }
-        return getGson().fromJson(result, Types.getType(typeResult));
+        return getGson().fromJson(result, request.type);
     }
 
     private Gson getGson() {
@@ -208,10 +205,4 @@ public class WebClient<T> extends Thread {
         IMMEDIATELY
     }
 
-    public static enum Type {
-        bool,
-        welcome,
-        lastChanges,
-        user
-    }
 }

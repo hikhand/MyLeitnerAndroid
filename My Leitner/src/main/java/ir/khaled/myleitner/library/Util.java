@@ -18,7 +18,7 @@ import java.security.NoSuchAlgorithmException;
  * Created by kh.bakhtiari on 5/25/2014.
  */
 public class Util {
-    public static final String SERVER_ADDRESS = "192.168.1.41";
+    public static final String SERVER_ADDRESS = "192.168.1.2";
     public static final int SERVER_PORT = 4455;
     private static final String FONT_UI = "font_ui.ttf";
     private static final String FONT_MULTI_LINE = "font_multi_line.ttf";

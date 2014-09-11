@@ -119,7 +119,7 @@ public class Card {
          */
         private void saveCard() {
 
-            Request request = new Request(context, Request.REQUEST_ADD_CARD) {
+            Request request = new Request(context, Request.Method.ADD_CARD) {
                 @Override
                 public HashMap<String, String> getExtraParams() {
                     HashMap<String, String> extraParams = new HashMap<String, String>();
@@ -128,7 +128,7 @@ public class Card {
                 }
             };
 
-            WebClient<Boolean> webClient = new WebClient<Boolean>(request, WebClient.Connection.PERMANENT, WebClient.Type.bool, this);
+            WebClient<Boolean> webClient = new WebClient<Boolean>(request, WebClient.Connection.PERMANENT, this);
             webClient.start();
         }
 

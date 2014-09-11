@@ -18,7 +18,7 @@ import ir.khaled.myleitner.interfaces.Loading;
 /**
  * Created by khaled on 6/18/2014.
  */
-public class MainFragment extends Fragment implements FragmentManager.OnBackStackChangedListener {
+public class FrontFragment extends Fragment implements FragmentManager.OnBackStackChangedListener {
     private ListView lv_main;
     private Context context;
 
@@ -26,7 +26,7 @@ public class MainFragment extends Fragment implements FragmentManager.OnBackStac
      * Returns a new instance of this fragment.
      */
     public static Fragment newInstance() {
-        MainFragment fragment = new MainFragment();
+        FrontFragment fragment = new FrontFragment();
 //        Bundle args = new Bundle();
 //        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
 //        fragment.setArguments(args);

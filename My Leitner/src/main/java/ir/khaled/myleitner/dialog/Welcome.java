@@ -70,10 +70,10 @@ public class Welcome extends AppDialog implements ResponseListener<Welcome>, Vie
     }
 
     private void callWebService() {
-        Request request = new Request(context, Request.REQUEST_WELCOME);
+        Request request = new Request(context, Request.Method.WELCOME);
         request.addParam(PARAM_VERSION_CODE, Device.getInstance(context).appVersionCode + "");
 
-        WebClient<Welcome> webClient = new WebClient<Welcome>(request, WebClient.Connection.PERMANENT, WebClient.Type.welcome, this);
+        WebClient<Welcome> webClient = new WebClient<Welcome>(request, WebClient.Connection.PERMANENT, this);
         webClient.start();
     }
 
