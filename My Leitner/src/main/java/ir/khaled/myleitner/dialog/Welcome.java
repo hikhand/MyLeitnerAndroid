@@ -13,7 +13,7 @@ import ir.khaled.myleitner.interfaces.ResponseListener;
 import ir.khaled.myleitner.model.Device;
 import ir.khaled.myleitner.webservice.Request;
 import ir.khaled.myleitner.webservice.Response;
-import ir.khaled.myleitner.webservice.WebClient;
+import ir.khaled.myleitner.webservice.WebRequest;
 
 /**
  * Created by kh.bakhtiari on 5/25/2014.
@@ -60,7 +60,7 @@ public class Welcome extends AppDialog implements ResponseListener<Welcome>, Vie
     @Override
     protected void onStop() {
         super.onStop();
-        setIsNotFirstRun();//TODO uncomment this line
+        setIsNotFirstRun();
     }
 
     private void init() {
@@ -70,11 +70,11 @@ public class Welcome extends AppDialog implements ResponseListener<Welcome>, Vie
     }
 
     private void callWebService() {
-        Request request = new Request(context, Request.Method.WELCOME);
-        request.addParam(PARAM_VERSION_CODE, Device.getInstance(context).appVersionCode + "");
+        Request request = new Request(Request.Method.WELCOME, Request.ConType.PERMANENT);
+        request.addParam(PARAM_VERSION_CODE, Device.getInstance().appVersionCode + "");
 
-        WebClient<Welcome> webClient = new WebClient<Welcome>(request, WebClient.Connection.PERMANENT, this);
-        webClient.start();
+        WebRequest<Welcome> webRequest = new WebRequest<Welcome>(request, this);
+        webRequest.start();
     }
 
     private void setIsNotFirstRun() {

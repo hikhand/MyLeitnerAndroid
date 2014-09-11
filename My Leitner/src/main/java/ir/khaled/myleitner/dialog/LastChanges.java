@@ -13,7 +13,7 @@ import ir.khaled.myleitner.interfaces.ResponseListener;
 import ir.khaled.myleitner.model.Device;
 import ir.khaled.myleitner.webservice.Request;
 import ir.khaled.myleitner.webservice.Response;
-import ir.khaled.myleitner.webservice.WebClient;
+import ir.khaled.myleitner.webservice.WebRequest;
 
 /**
  * Created by kh.bakhtiari on 5/27/2014.
@@ -50,10 +50,10 @@ public class LastChanges extends AppDialog implements ResponseListener<LastChang
 
         if (lastVersionCode == 0) {/** is the first installed version. */
             SharedPreferences.Editor editor = StorageHelper.getSharedPreferencesEditor(context);
-            editor.putInt(S_LAST_VERSION_CODE, Device.getInstance(context).appVersionCode);
+            editor.putInt(S_LAST_VERSION_CODE, Device.getInstance().appVersionCode);
             editor.commit();
             return false;
-        } else if (Device.getInstance(context).appVersionCode > lastVersionCode) {/** this is updated version*/
+        } else if (Device.getInstance().appVersionCode > lastVersionCode) {/** this is updated version*/
             return true;
         }
         return false;
@@ -69,7 +69,7 @@ public class LastChanges extends AppDialog implements ResponseListener<LastChang
     @Override
     protected void onStop() {
         super.onStop();
-        setNotUpdateVersion();//TODO uncomment this line
+        setNotUpdateVersion();
     }
 
     private void init() {
@@ -82,16 +82,16 @@ public class LastChanges extends AppDialog implements ResponseListener<LastChang
      * start a new thread to get lastChanges
      */
     private void callWebService() {
-        Request request = new Request(context, Request.Method.REGISTER_DEVICE);
-        request.addParam(PARAM_VERSION_CODE, Device.getInstance(context).appVersionCode + "");
+        Request request = new Request(Request.Method.CHANGES, Request.ConType.PERMANENT);
+        request.addParam(PARAM_VERSION_CODE, Device.getInstance().appVersionCode + "");
 
-        WebClient<LastChanges> webClient = new WebClient<LastChanges>(request, WebClient.Connection.PERMANENT, this);
-        webClient.start();
+        WebRequest<LastChanges> webRequest = new WebRequest<LastChanges>(request, this);
+        webRequest.start();
     }
 
     private void setNotUpdateVersion() {
         SharedPreferences.Editor editor = StorageHelper.getSharedPreferencesEditor(context);
-        editor.putInt(S_LAST_VERSION_CODE, Device.getInstance(context).appVersionCode);
+        editor.putInt(S_LAST_VERSION_CODE, Device.getInstance().appVersionCode);
         editor.commit();
     }
 

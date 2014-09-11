@@ -15,7 +15,7 @@ import ir.khaled.myleitner.library.Util;
 import ir.khaled.myleitner.view.AppEditText;
 import ir.khaled.myleitner.webservice.Request;
 import ir.khaled.myleitner.webservice.Response;
-import ir.khaled.myleitner.webservice.WebClient;
+import ir.khaled.myleitner.webservice.WebRequest;
 
 /**
  * Created by kh.bakhtiari on 5/30/2014.
@@ -137,12 +137,12 @@ public class User {
          * call server to login
          */
         private void loginImpl() {
-            Request request = new Request(context, Request.Method.LOGIN);
+            Request request = new Request(Request.Method.LOGIN, Request.ConType.PERMANENT);
             request.addParam(PARAM_EMAIL, getEmail());
             request.addParam(PARAM_PASSWORD, getPassword());
 
-            WebClient<User> webClient = new WebClient<User>(request, WebClient.Connection.PERMANENT, this);
-            webClient.start();
+            WebRequest<User> webRequest = new WebRequest<User>(request, this);
+            webRequest.start();
         }
 
         private String getEmail() {
@@ -276,13 +276,13 @@ public class User {
         }
 
         private void registerImp() {
-            Request request = new Request(context, Request.Method.REGISTER);
+            Request request = new Request(Request.Method.REGISTER, Request.ConType.PERMANENT);
             request.addParam(PARAM_EMAIL, getEmail());
             request.addParam(PARAM_DISPLAY_NAME, getDisplayName());
             request.addParam(PARAM_PASSWORD, getPassword());
 
-            WebClient<User> webClient = new WebClient<User>(request, WebClient.Connection.PERMANENT, this);
-            webClient.start();
+            WebRequest<User> webRequest = new WebRequest<User>(request, this);
+            webRequest.start();
         }
 
         private String getEmail() {

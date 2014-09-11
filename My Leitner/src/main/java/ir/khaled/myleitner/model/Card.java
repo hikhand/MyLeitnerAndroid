@@ -18,6 +18,7 @@ import ir.khaled.myleitner.interfaces.ResponseListener;
 import ir.khaled.myleitner.webservice.Request;
 import ir.khaled.myleitner.webservice.Response;
 import ir.khaled.myleitner.webservice.WebClient;
+import ir.khaled.myleitner.webservice.WebRequest;
 
 /**
  * Created by khaled on 6/22/2014.
@@ -119,7 +120,7 @@ public class Card {
          */
         private void saveCard() {
 
-            Request request = new Request(context, Request.Method.ADD_CARD) {
+            Request request = new Request(Request.Method.ADD_CARD, Request.ConType.PERMANENT) {
                 @Override
                 public HashMap<String, String> getExtraParams() {
                     HashMap<String, String> extraParams = new HashMap<String, String>();
@@ -128,8 +129,8 @@ public class Card {
                 }
             };
 
-            WebClient<Boolean> webClient = new WebClient<Boolean>(request, WebClient.Connection.PERMANENT, this);
-            webClient.start();
+            WebRequest<Boolean> webRequest = new WebRequest<Boolean>(request, this);
+            webRequest.start();
         }
 
         public void saveCardInvalidTitle() {

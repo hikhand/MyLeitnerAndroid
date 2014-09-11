@@ -1,7 +1,5 @@
 package ir.khaled.myleitner.webservice;
 
-import android.content.Context;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
@@ -18,19 +16,19 @@ public class Request {
     private static final String PARAM_UDK = "udk";
     @Expose
     public String requestName;
+    public Type type;
     @Expose
     private HashMap<String, String> params;
-    public Type type;
     private boolean paramChanged;
     private String jsonParams;
-    private Context context;
+    public ConType connection;
 
-    public Request(Context context, Method method) {
+    public Request(Method method, ConType connection) {
         this.type = method.type;
         this.requestName = method.request;
         this.paramChanged = true;
-        this.context = context;
-        addParam(PARAM_UDK, Device.getUDK(context));
+        this.connection = connection;
+        addParam(PARAM_UDK, Device.getUDK());
     }
 
     public void addParam(String name, String value) {
@@ -50,9 +48,8 @@ public class Request {
 
     /**
      * this method shouldn't be called from main thread
-     * @return
      */
-    public String getJsonParams() {
+    public String getJsonRequest() {
         if (!paramChanged)
             return jsonParams;
 
@@ -73,10 +70,6 @@ public class Request {
 
     }
 
-    public Context getContext() {
-        return context;
-    }
-
     public static enum Method {
         PING("ping", Types.booleanT()),
         WELCOME("welcome", Types.welcome()),
@@ -95,4 +88,8 @@ public class Request {
         }
     }
 
+    public static enum ConType {
+        PERMANENT,
+        IMMEDIATE
+    }
 }

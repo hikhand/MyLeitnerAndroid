@@ -1,6 +1,5 @@
 package ir.khaled.myleitner.webservice;
 
-import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
 
@@ -13,10 +12,10 @@ import java.io.OutputStreamWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
-import ir.khaled.myleitner.helper.ErrorHelper;
+import ir.khaled.myleitner.helper.Errors;
 import ir.khaled.myleitner.helper.Logger;
-import ir.khaled.myleitner.library.Util;
 import ir.khaled.myleitner.interfaces.ResponseListener;
+import ir.khaled.myleitner.library.Util;
 import ir.khaled.myleitner.model.Device;
 
 /**
@@ -33,7 +32,6 @@ public class WebClient<T> extends Thread {
     private Request request;
     private ResponseListener<T> receiveListener;
     private Connection connectionType;
-    private Context context;
     private Handler handlerUI = new Handler();
 
     /**
@@ -41,13 +39,12 @@ public class WebClient<T> extends Thread {
      * @param connectionType
      * @param receiveListener
      */
-    public WebClient(Request request, Connection connectionType, ResponseListener<T> receiveListener) {
+    private WebClient(Request request, Connection connectionType, ResponseListener<T> receiveListener) {
         this.request = request;
         this.receiveListener = receiveListener;
         this.connectionType = connectionType;
-        this.context = request.getContext();
         if (requestPing == null)
-            requestPing = new Request(context, Request.Method.PING);
+            requestPing = new Request(Request.Method.PING, Request.ConType.PERMANENT);
     }
 
 
@@ -56,7 +53,7 @@ public class WebClient<T> extends Thread {
         try {
             long start = System.currentTimeMillis();
             defineSocketConnection();
-            getData(socket, request.getJsonParams(), true);
+            getData(socket, request.getJsonRequest(), true);
             Log.i("Speed", request.requestName + " in: " + (System.currentTimeMillis() - start) + " millis");
         } catch (Exception e) {
             e.printStackTrace();
@@ -74,9 +71,9 @@ public class WebClient<T> extends Thread {
             return true;
 
         switch (response.errorCode) {
-            case ErrorHelper.UNKNOWN_DEVICE:
-                if (getData(socket, Device.getRequestRegisterDevice(context).getJsonParams(), false)) {
-                    return getData(socket, request.getJsonParams(), true);
+            case Errors.UNKNOWN_DEVICE:
+                if (getData(socket, Device.getRequestRegisterDevice().getJsonRequest(), false)) {
+                    return getData(socket, request.getJsonRequest(), true);
                 }
             default:
                 if (returnToListener) {
@@ -157,9 +154,7 @@ public class WebClient<T> extends Thread {
 
     private Socket getSocketOpen() throws IOException {
         synchronized (WebClient.class) {
-            if (socketOpen != null && !pingServer()) {
-                socketOpen = getNewSocket();
-            } else if (socketOpen == null) {
+            if (socketOpen == null || !pingServer()) {
                 socketOpen = getNewSocket();
             }
 

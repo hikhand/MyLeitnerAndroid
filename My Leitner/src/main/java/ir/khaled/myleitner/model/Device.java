@@ -49,6 +49,7 @@ public class Device {
     private Device(Context context) {
         this.context = context;
 
+        UDK = Util.md5(Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID));
         try {
             PackageInfo pinfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
             appVersionCode = pinfo.versionCode;
@@ -58,22 +59,20 @@ public class Device {
         }
     }
 
-    public static Device getInstance(Context context) {
-        if (device == null) {
-            device = new Device(context);
-        }
+    public static void initiate(Context context) {
+        device = new Device(context);
+    }
+
+    public static Device getInstance() {
         return device;
     }
 
-    public static String getUDK(Context context) {
-        if (UDK == null || UDK.length() == 0)
-            UDK = Util.md5(Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID));
-
+    public static String getUDK() {
         return UDK;
     }
 
-    private static String createJson(Context context) {
-        DeviceInfo deviceInfo = Device.getInstance(context).getDeviceInfo();
+    private static String createJson() {
+        DeviceInfo deviceInfo = Device.getInstance().getDeviceInfo();
         String jsonString = null;
 
         try {
@@ -85,9 +84,9 @@ public class Device {
         return jsonString;
     }
 
-    public static Request getRequestRegisterDevice(Context context) {
-        Request request = new Request(context, Request.Method.REGISTER_DEVICE);
-        request.addParam(PARAM_DEVICE_INFO, createJson(context));
+    public static Request getRequestRegisterDevice() {
+        Request request = new Request(Request.Method.REGISTER_DEVICE, Request.ConType.IMMEDIATE);
+        request.addParam(PARAM_DEVICE_INFO, createJson());
         return request;
     }
 
@@ -300,7 +299,7 @@ public class Device {
 
             android_id = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
 
-            udk = getUDK(context);
+            udk = getUDK();
         }
     }
 
